@@ -19,11 +19,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::get('home',[
-    'uses' => 'PostController@postStatus',
-    'as'   => 'home',
-    'middleware' => ['auth'],
-]);
+//Route::get('home',[
+//    'uses' => 'PostController@postStatus',
+//    'as'   => 'home',
+//    'middleware' => ['auth'],
+//]);
 Route::get('login','AuthController@getLogin');
 Route::get('register','AuthController@getRegister');
 Route::post('post-register','UserController@postRegister');
@@ -85,4 +85,13 @@ Route::post('/comment/like',[
     'as'     => '/comment/like',
     'middleware' => ['auth'],
 ]);
+
+
+Route::group(['middleware' => 'web'], function () {
+    Route::auth();
+    Route::get('/home', 'HomeController@index');
+});
+Route::post('sendmessage', 'chatController@sendMessage');
+
+
 

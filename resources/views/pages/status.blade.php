@@ -1,7 +1,7 @@
 <div class="post">
     <div class="user-block">
         <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
+                        <div class="username">
                             <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
                             @if(Auth::user()->id == $status->user->id)
                                 <a href="{{ route('/delete/article', ['id' => $status->id]) }}"
@@ -9,7 +9,7 @@
                                 <a href="#" class="pull-right btn-box-tool btn-edit-status"><i
                                             class="fa fa-edit"></i></a>
                             @endif
-                        </span>
+                        </div>
         <span class="description">{{ $status->created_at->diffForHumans() }}</span>
     </div>
     <!-- /.user-block -->

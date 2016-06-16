@@ -46,27 +46,33 @@ class PostController extends Controller
 
         $statuses = Status::where(function ($query) {
             return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Users::where('id', Auth::user()->id)->first()->friends()->lists('id'));
-        })->orderBy('created_at', 'desc')->paginate(11);
+        })->orderBy('created_at', 'desc')->get();
 
         return view('pages.dashboard')->with('statuses', $statuses);
     }
 
     public function postArticle()
     {
-        If (Input::has('status')) {
-            $text = e(Input::get('status'));
-            if ($text != null) {
-                $status = new Status();
-                $status->body = $text;
-                $status->user_id = Auth::user()->id;
-
-                $status->save();
-                return redirect('dashboard');
-            } else {
-                return redirect()->back();
-            }
+//        If (Input::has('status')) {
+//            $text = e(Input::get('status'));
+//            if ($text != null) {
+//                $status = new Status();
+//                $status->body = $text;
+//                $status->user_id = Auth::user()->id;
+//
+//                $status->save();
+//                return redirect('dashboard');
+//            } else {
+//                return redirect()->back();
+//            }
+//        }
+//        return redirect()->back();
+        if(Input::hasFile('images')){
+            $file = Input::file('images');
+            $file->move('images', $file->getClientOriginalName());
+            $image = Image::make(sprintf('images/%s', $file->getClientOriginalName()))->resize(200, 200)->save();
+            return 'hahahah';
         }
-        return redirect()->back();
     }
 
     public function postComment()

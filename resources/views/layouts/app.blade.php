@@ -30,6 +30,8 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="skin-blue sidebar-mini">
+<script src="{{ asset('public/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+<script src="{{ asset('public/js/tool.js') }}"></script>
 <div class="wrapper">
 
     @include('layouts.partials.mainheader')

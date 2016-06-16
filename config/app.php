@@ -158,7 +158,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
-
+        Intervention\Image\ImageServiceProvider::class,
     ),
 
     /*
@@ -194,7 +194,7 @@ return [
         'Password' => Illuminate\Support\Facades\Password::class,
         'Queue' => Illuminate\Support\Facades\Queue::class,
         'Redirect' => Illuminate\Support\Facades\Redirect::class,
-        'Redis' => Illuminate\Support\Facades\Redis::class,
+        'LRedis' => 'Illuminate\Support\Facades\Redis',
         'Request' => Illuminate\Support\Facades\Request::class,
         'Response' => Illuminate\Support\Facades\Response::class,
         'Route' => Illuminate\Support\Facades\Route::class,
@@ -209,6 +209,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
 
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

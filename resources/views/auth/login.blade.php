@@ -8,21 +8,19 @@
     <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Ban</b>BUA</a>
+            <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
         </div><!-- /.login-logo -->
-        @if(Session::has('messages'))
-            <div class="alert alert-success">{{ Session::get('messages') }}</div>
-        @endif
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
+        {{--@if (count($errors) > 0)--}}
+            {{--<div class="alert alert-danger">--}}
+                {{--<strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>--}}
+                {{--<ul>--}}
+                    {{--@foreach ($errors->all() as $error)--}}
+                        {{--<li>{{ $error }}</li>--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
+            {{--</div>--}}
+        {{--@endif--}}
 
         <div class="login-box-body">
             <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
@@ -32,11 +30,21 @@
                     <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}"
                            name="email"/>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control"
                            placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <div class="row">
                     <div class="col-xs-8">

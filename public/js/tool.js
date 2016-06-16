@@ -16,7 +16,7 @@ var common = {
                     "status_id" : staid
                 },'json'
             ).done(function (data) {
-                $('.count-'+staid).text(data.count_like);
+                $('.count-'+staid).text('('+data.count_like+')');
             }).error(function (err) {
                 console.log(err);
             });
@@ -32,13 +32,13 @@ var comment = {
         $(document).on('click','.like-comment-btn',function (e) {
             e.preventDefault();
             var cmid = $(this).closest("form").find("input[name='comment_id']").val();
-            $.post('/larasocial/comment/like',
+            $.post('/larasocial-master/comment/like',
                 {
                     "_token": $(this).closest("form").find("input[name='_token']").val(),
                     "comment_id" : cmid
                 },'json'
             ).done(function (data) {
-                $('.count-comment-'+cmid).text(data.count_like);
+                $('.count-comment-'+cmid).text('('+data.count_like+')');
             }).error(function (err) {
                 console.log(err);
             });
@@ -51,9 +51,10 @@ var comment = {
 
 var editstatus = {
     editStatus: function () {
-        $(document).on('click','.btn-edit-status',function (e) {
-            e.preventDefault();
-            var statusbody = e.target.parentNode.parentNode.parentNode.childNodes[2].textContent;
+        $(document).on('click','.btn-edit-status',function (event) {
+            event.preventDefault();
+            var statusbody = event.target.parentNode.parentNode.parentNode.childNodes[2].textContent;
+            console.log(statusbody);
             $('#textareastatus').val(statusbody);
             $("#editModal").modal('show');
         });

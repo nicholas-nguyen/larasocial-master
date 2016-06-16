@@ -29,6 +29,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <script src="{{ asset('public/js/jquery-2.2.1.min.js') }}"></script>
+<script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
 <script src="{{ asset('public/js/tool.js') }}"></script>
 <div class="wrapper">
 
@@ -305,7 +306,7 @@
                     <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -506,41 +507,13 @@
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <button type="input" class="btn btn-default">Pic</button>
+                                            <input type="file" name="images" value="Picture">
                                             <button type="submit" class="btn btn-info pull-right">Post</button>
                                         </div>
                                         <!-- /.box-footer -->
                                     </form>
                                 </div>
-                            {{--<div class="post">--}}
-                            {{--<div class="user-block">--}}
-                            {{--<img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">--}}
-                            {{--<span class="username">--}}
-                            {{--<a href="#">Jonathan Burke Jr.</a>--}}
-                            {{--<a href="#" class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>--}}
-                            {{--</span>--}}
-                            {{--<span class="description">Shared publicly - 7:30 PM today</span>--}}
-                            {{--</div>--}}
-                            {{--<!-- /.user-block -->--}}
-                            {{--<p>--}}
-                            {{--Lorem ipsum represents a long-held tradition for designers,--}}
-                            {{--typographers and the like. Some people hate it and argue for--}}
-                            {{--its demise, but others ignore the hate as they create awesome--}}
-                            {{--tools to help create filler text for everyone from bacon lovers--}}
-                            {{--to Charlie Sheen fans.--}}
-                            {{--</p>--}}
-                            {{--<ul class="list-inline">--}}
-                            {{--<li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>--}}
-                            {{--<li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> Like</a>--}}
-                            {{--</li>--}}
-                            {{--<li class="pull-right">--}}
-                            {{--<a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i> Comments--}}
-                            {{--(5)</a></li>--}}
-                            {{--</ul>--}}
 
-                            {{--<input class="form-control input-sm" type="text" placeholder="Type a comment">--}}
-                            {{--</div>--}}
-                            <!-- /.post -->
                             @foreach($statuses as $status)
                                 {!!
                                    view('pages.status',[
@@ -654,31 +627,48 @@
                             <div class="tab-pane" id="settings">
                                 <form class="form-horizontal">
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>
 
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" id="inputFirstname" placeholder="Firsname">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                        <label for="inputLastname" class="col-sm-2 control-label">Lastname</label>
 
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                            <input type="text" class="form-control" id="inputLastname" placeholder="Lastname">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="date" class="form-control" id="inputBirthday" placeholder="Birthday">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                                        <label for="inputGender" class="col-sm-2 control-label">Gender</label>
 
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                                            <select class="form-control" id="inputGender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputHometown" class="col-sm-2 control-label">Hometown</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputHometown" placeholder="Hometown">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>
+
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="inputCurentcity" placeholder="Curent city">
                                         </div>
                                     </div>
                                     <div class="form-group">
