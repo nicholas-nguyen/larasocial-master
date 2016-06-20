@@ -77,7 +77,7 @@ class Users extends Model
 
     public function friendRequests()
     {
-        return $this->friendsOfMine()->wherePivot('accepted', false)->get();
+        return $this->friendsOf()->wherePivot('accepted', false)->get();
     }
 
     public function friendRequestsPending()

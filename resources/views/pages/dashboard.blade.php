@@ -25,9 +25,9 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 <script src="{{ asset('public/js/jquery-2.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
 <script src="{{ asset('public/js/tool.js') }}"></script>
@@ -67,7 +67,8 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Support Team
@@ -80,7 +81,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 AdminLTE Design Team
@@ -92,7 +94,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Developers
@@ -104,7 +107,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Sales Department
@@ -116,7 +120,8 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle"
+                                                     alt="User Image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -148,7 +153,8 @@
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
+                                            <i class="fa fa-warning text-yellow"></i> Very long description here that
+                                            may not fit into the
                                             page and may cause design problems
                                         </a>
                                     </li>
@@ -190,7 +196,9 @@
                                                 <small class="pull-right">20%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">20% Complete</span>
                                                 </div>
                                             </div>
@@ -204,7 +212,9 @@
                                                 <small class="pull-right">40%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-green" style="width: 40%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">40% Complete</span>
                                                 </div>
                                             </div>
@@ -218,7 +228,9 @@
                                                 <small class="pull-right">60%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-red" style="width: 60%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">60% Complete</span>
                                                 </div>
                                             </div>
@@ -232,7 +244,9 @@
                                                 <small class="pull-right">80%</small>
                                             </h3>
                                             <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                                                <div class="progress-bar progress-bar-yellow" style="width: 80%"
+                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
+                                                     aria-valuemax="100">
                                                     <span class="sr-only">80% Complete</span>
                                                 </div>
                                             </div>
@@ -259,7 +273,7 @@
 
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
-                                    <small>Member  since {{ Auth::user()->created_at }}</small>
+                                    <small>Member since {{ Auth::user()->created_at }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
@@ -269,7 +283,8 @@
                                         <a href="#">Followers</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
+                                        <a href="#" data-toggle="modal" data-target="#changepassModal">Change
+                                            password</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#">Friends</a>
@@ -280,7 +295,8 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{{ route('profile.index',['id' => Auth::user()->id])}}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('profile.index',['id' => Auth::user()->id])}}"
+                                       class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="{{ url('logout') }}" class="btn btn-default btn-flat">Sign out</a>
@@ -301,163 +317,23 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
+
             <!-- search form -->
-            <form action="#" method="get" class="sidebar-form">
+            <form action="{{ url('search') }}" method="post" class="sidebar-form">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
+                    <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search...">
+                      <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search"><i
+                                    class="fa fa-search"></i>
+                        </button>
+                      </span>
                 </div>
             </form>
             <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <ul class="sidebar-menu">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-files-o"></i>
-                        <span>Layout Options</span>
-                        <span class="label label-primary pull-right">4</span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                        <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                        <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                        <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../widgets.html">
-                        <i class="fa fa-th"></i> <span>Widgets</span>
-                        <small class="label pull-right bg-green">new</small>
-                    </a>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-pie-chart"></i>
-                        <span>Charts</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                        <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                        <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                        <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-laptop"></i>
-                        <span>UI Elements</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                        <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                        <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                        <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                        <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                        <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>Forms</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                        <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                        <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-table"></i> <span>Tables</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-                        <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="../calendar.html">
-                        <i class="fa fa-calendar"></i> <span>Calendar</span>
-                        <small class="label pull-right bg-red">3</small>
-                    </a>
-                </li>
-                <li>
-                    <a href="../mailbox/mailbox.html">
-                        <i class="fa fa-envelope"></i> <span>Mailbox</span>
-                        <small class="label pull-right bg-yellow">12</small>
-                    </a>
-                </li>
-                <li class="treeview active">
-                    <a href="#">
-                        <i class="fa fa-folder"></i> <span>Examples</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-                        <li class="active"><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-                        <li><a href="login.html"><i class="fa fa-circle-o"></i> Login</a></li>
-                        <li><a href="register.html"><i class="fa fa-circle-o"></i> Register</a></li>
-                        <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-                        <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-                        <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-                        <li><a href="blank.html"><i class="fa fa-circle-o"></i> Blank Page</a></li>
-                        <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-share"></i> <span>Multilevel</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                        <li>
-                            <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                                <li>
-                                    <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                    </ul>
-                </li>
-                <li><a href="../../documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-                <li class="header">LABELS</li>
-                <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <ul class="sidebar-menu" id="result">
+
             </ul>
         </section>
         <!-- /.sidebar -->
@@ -472,9 +348,12 @@
         <section class="content">
 
             <div class="row">
+                @if(Session::has('messages'))
+                    <div class="alert alert-success">{{ Session::get('messages') }}</div>
+                @endif
                 <div class="col-md-9">
                     <!---->
-                    <div class= "nav-tabs-custom">
+                    <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
                             <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
@@ -503,7 +382,8 @@
                                     <form class="form-horizontal" method="post" action="{{ url('/post/article') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="box-body">
-                                            <textarea id="textareastatus" name="status" placeholder="What are you thinking?"></textarea>
+                                            <textarea id="textareastatus" name="status"
+                                                      placeholder="What are you thinking?"></textarea>
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
@@ -514,17 +394,17 @@
                                     </form>
                                 </div>
 
-                            @foreach($statuses as $status)
-                                {!!
-                                   view('pages.status',[
-                                      'status' => $status,
-                                      'user' => \App\Users::find($status->user_id),
-                                      'comments' => \App\Comment::where('status_id', $status->id)->orderBy('created_at','DESC')->get(),
-                                      //'comments_count' => \App\Comment::where('status_id', $status->id)->count(),
-                                      //'likes_count' => \App\Like::where('status_id', $status->id)->count()
-                                   ])
-                                !!}
-                            @endforeach
+                                @foreach($statuses as $status)
+                                    {!!
+                                       view('pages.status',[
+                                          'status' => $status,
+                                          'user' => \App\Users::find($status->user_id),
+                                          'comments' => \App\Comment::where('status_id', $status->id)->orderBy('created_at','DESC')->get(),
+                                          //'comments_count' => \App\Comment::where('status_id', $status->id)->count(),
+                                          //'likes_count' => \App\Like::where('status_id', $status->id)->count()
+                                       ])
+                                    !!}
+                                @endforeach
 
                             </div>
                             <!-- /.tab-pane -->
@@ -545,7 +425,8 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
 
-                                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                                            <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email
+                                            </h3>
 
                                             <div class="timeline-body">
                                                 Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
@@ -567,7 +448,8 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
 
-                                            <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request
+                                            <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted
+                                                your friend request
                                             </h3>
                                         </div>
                                     </li>
@@ -579,7 +461,8 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
 
-                                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                                            <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post
+                                            </h3>
 
                                             <div class="timeline-body">
                                                 Take me to your leader!
@@ -606,7 +489,8 @@
                                         <div class="timeline-item">
                                             <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
 
-                                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                                            <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos
+                                            </h3>
 
                                             <div class="timeline-body">
                                                 <img src="http://placehold.it/150x100" alt="..." class="margin">
@@ -630,21 +514,24 @@
                                         <label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputFirstname" placeholder="Firsname">
+                                            <input type="text" class="form-control" id="inputFirstname"
+                                                   placeholder="Firsname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputLastname" class="col-sm-2 control-label">Lastname</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputLastname" placeholder="Lastname">
+                                            <input type="text" class="form-control" id="inputLastname"
+                                                   placeholder="Lastname">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
 
                                         <div class="col-sm-10">
-                                            <input type="date" class="form-control" id="inputBirthday" placeholder="Birthday">
+                                            <input type="date" class="form-control" id="inputBirthday"
+                                                   placeholder="Birthday">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -661,28 +548,32 @@
                                         <label for="inputHometown" class="col-sm-2 control-label">Hometown</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputHometown" placeholder="Hometown">
+                                            <input type="text" class="form-control" id="inputHometown"
+                                                   placeholder="Hometown">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputCurentcity" placeholder="Curent city">
+                                            <input type="text" class="form-control" id="inputCurentcity"
+                                                   placeholder="Curent city">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                                            <input type="text" class="form-control" id="inputSkills"
+                                                   placeholder="Skills">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                                    <input type="checkbox"> I agree to the <a href="#">terms and
+                                                        conditions</a>
                                                 </label>
                                             </div>
                                         </div>
@@ -699,72 +590,62 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="box box-primary">
-                        <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-                            <h3 class="profile-username text-center">Nina Mcintire</h3>
-
-                            <p class="text-muted text-center">Software Engineer</p>
-
-                            <ul class="list-group list-group-unbordered">
-                                <li class="list-group-item">
-                                    <b>Followers</b> <a class="pull-right">1,322</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Following</b> <a class="pull-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Friends</b> <a class="pull-right">13,287</a>
-                                </li>
-                            </ul>
-
-                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
                     <!-- /.box -->
 
-                    <!-- About Me Box -->
-                    <div class="box box-primary">
+
+                {{--<aside class="main-sidebar">--}}
+                <!-- sidebar: style can be found in sidebar.less -->
+                {{--<section class="sidebar">--}}
+                <!-- Sidebar user panel -->
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    {{--<ul class="sidebar-menu">--}}
+                    {{--<li class="header">FRIENDS CHAT</li>--}}
+                    {{--@foreach($friends as $friend)--}}
+                    {{--<li class="active treeview">--}}
+                    {{--<a href="#">--}}
+                    {{--<img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg"--}}
+                    {{--alt="User Image">--}}
+                    {{--<span class="username">--}}
+                    {{--{{ $friend->firstname }} {{ $friend->lastname }}--}}
+                    {{--</span>--}}
+                    {{--</a>--}}
+                    {{--</li>--}}
+                    {{--@endforeach--}}
+                    {{--</ul>--}}
+                    {{--</section>--}}
+                    <div class="box box-default collapsed-box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title">FRIENDS CHAT</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                            class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
-                            <p class="text-muted">
-                                B.S. in Computer Science from the University of Tennessee at Knoxville
-                            </p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
-
-                            <p class="text-muted">Malibu, California</p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
-
-                            <p>
-                                <span class="label label-danger">UI Design</span>
-                                <span class="label label-success">Coding</span>
-                                <span class="label label-info">Javascript</span>
-                                <span class="label label-warning">PHP</span>
-                                <span class="label label-primary">Node.js</span>
-                            </p>
-
-                            <hr>
-
-                            <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                            @foreach($friends as $friend)
+                                <div class="list-group-item">
+                                    <a href="#">
+                                        <img class="img-circle img-sm" src="public/img/user3-128x128.jpg"
+                                             alt="User Image">
+                                        <span class="username">
+                                        {{ $friend->firstname }} {{ $friend->lastname }}
+                                        </span>
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
-                        <!-- /.box-body -->
+                        {{--<!-- /.box-body -->--}}
                     </div>
-                    <!-- /.col -->
+
+                    <!-- /.sidebar -->
+                    {{--</aside>--}}
+
                 </div>
                 <!-- /.row -->
             </div>
@@ -971,8 +852,58 @@
     </aside>
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
-         immediately after the control sidebar -->
+    immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
+</div>
+
+<div class="modal" id="changepassModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <form action="{{ url('/change-password') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Current password:</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password">
+                        @if ($errors->has('current_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('current_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">New Password:</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                        @if ($errors->has('new_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('new_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Retype Password:</label>
+                        <input type="password" class="form-control" id="retype_password" name="retype_password">
+                        @if ($errors->has('retype_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('retype_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>
 <!-- ./wrapper -->
 
@@ -991,6 +922,7 @@
     $(document).ready(function () {
         $('#textareastatus').autoGrow();
     });
+
 </script>
 <style type="text/css">
     /*.margin-5 {*/
@@ -1004,6 +936,98 @@
         left: 5px;
         font: 9pt Consolas;
         resize: none;
+    }
+
+    @media only screen and (max-width: 540px) {
+        .chat-sidebar {
+            display: none !important;
+        }
+
+        .chat-popup {
+            display: none !important;
+        }
+    }
+
+    body {
+        background-color: #e9eaed;
+    }
+
+    .chat-sidebar {
+        width: 200px;
+        position: fixed;
+        height: 100%;
+        right: 0px;
+        top: 0px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: 1px solid rgba(29, 49, 91, .3);
+    }
+
+    .sidebar-name {
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 4px;
+        font-size: 12px;
+    }
+
+    .sidebar-name span {
+        padding-left: 5px;
+    }
+
+    .sidebar-name a {
+        display: block;
+        height: 100%;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .sidebar-name:hover {
+        background-color: #5bc0de;
+    }
+
+    .sidebar-name img {
+        width: 32px;
+        height: 32px;
+        vertical-align: middle;
+    }
+
+    .popup-box {
+        display: none;
+        position: fixed;
+        bottom: 0px;
+        right: 220px;
+        height: 285px;
+        background-color: rgb(237, 239, 244);
+        width: 300px;
+        border: 1px solid rgba(29, 49, 91, .3);
+    }
+
+    .popup-box .popup-head {
+        background-color: #6d84b4;
+        padding: 5px;
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+        clear: both;
+    }
+
+    .popup-box .popup-head .popup-head-left {
+        float: left;
+    }
+
+    .popup-box .popup-head .popup-head-right {
+        float: right;
+        opacity: 0.5;
+    }
+
+    .popup-box .popup-head .popup-head-right a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .popup-box .popup-messages {
+        height: 100%;
+        overflow-y: scroll;
     }
 </style>
 

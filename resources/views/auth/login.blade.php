@@ -28,21 +28,21 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="form-group has-feedback">
                     <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}"
-                           name="email"/>
+                           name="Email"/>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    @if ($errors->has('email'))
+                    @if ($errors->has('Email'))
                         <span class="help-block">
-	                        <strong style="color: red">{{ $errors->first('email') }}</strong>
+	                        <strong style="color: red">{{ $errors->first('Email') }}</strong>
                         </span>
                     @endif
                 </div>
                 <div class="form-group has-feedback">
                     <input type="password" class="form-control"
-                           placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
+                           placeholder="{{ trans('adminlte_lang::message.password') }}" name="Password"/>
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    @if ($errors->has('password'))
+                    @if ($errors->has('Password'))
                         <span class="help-block">
-	                        <strong style="color: red">{{ $errors->first('password') }}</strong>
+	                        <strong style="color: red">{{ $errors->first('Password') }}</strong>
                         </span>
                     @endif
                 </div>

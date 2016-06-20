@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use LRedis;
 use App\LikeComment;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
@@ -20,59 +21,38 @@ class PostController extends Controller
 {
     public function postStatus(Request $request)
     {
-//        If(Input::has('status')){
-//            $text = e(Input::get('status'));
-//
-//            $status = new Status();
-//            $status->body = $text;
-//            $status->user_id = Auth::user()->id;
-//
-//            $status->save();
-//            return redirect('dashboard');
-//        }
 
-
-//        If(Input::has('like_status')) {
-//            $stalike = Input::get('like_status');
-//
-//            $selStatus = Status::find($stalike);
-//            $like = new Like();
-//            $like->user_id = Auth::user()->id;
-//            $like->status_id = $stalike;
-//            $like->save();
-//            
-//            return redirect('dashboard');
-//        }
-
+        $user = Users::where('id',Auth::user()->id)->first();
+        $friends = $user->friends();
         $statuses = Status::where(function ($query) {
             return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Users::where('id', Auth::user()->id)->first()->friends()->lists('id'));
-        })->orderBy('created_at', 'desc')->get();
+        })->orderBy('created_at', 'desc')->paginate(11);
 
-        return view('pages.dashboard')->with('statuses', $statuses);
+        return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends);
     }
 
     public function postArticle()
     {
-//        If (Input::has('status')) {
-//            $text = e(Input::get('status'));
-//            if ($text != null) {
-//                $status = new Status();
-//                $status->body = $text;
-//                $status->user_id = Auth::user()->id;
-//
-//                $status->save();
-//                return redirect('dashboard');
-//            } else {
-//                return redirect()->back();
-//            }
-//        }
-//        return redirect()->back();
-        if(Input::hasFile('images')){
-            $file = Input::file('images');
-            $file->move('images', $file->getClientOriginalName());
-            $image = Image::make(sprintf('images/%s', $file->getClientOriginalName()))->resize(200, 200)->save();
-            return 'hahahah';
+        If (Input::has('status')) {
+            $text = e(Input::get('status'));
+            if ($text != null) {
+                $status = new Status();
+                $status->body = $text;
+                $status->user_id = Auth::user()->id;
+
+                $status->save();
+                return redirect('dashboard');
+            } else {
+                return redirect()->back();
+            }
         }
+        return redirect()->back();
+//        if(Input::hasFile('images')){
+//            $file = Input::file('images');
+//            $file->move('images', $file->getClientOriginalName());
+//            $image = Image::make(sprintf('images/%s', $file->getClientOriginalName()))->resize(200, 200)->save();
+//            return 'hahahah';
+//        }
     }
 
     public function postComment()
@@ -112,9 +92,6 @@ class PostController extends Controller
         if (!$seStatus) {
             return Response::json(array('aa' => $statusID));
         }
-//        if(!Users::where('id',Auth::user()->id)->first()->isFriendsWith($seStatus->user)) {
-//            return redirect('dashboard');
-//        }
 
         if (Users::where('id', Auth::user()->id)->first()->hasLikedStatus($seStatus)) {
             $delike = Like::where(function ($q) {
@@ -123,7 +100,10 @@ class PostController extends Controller
             });
             $delike->delete();
             $response = $seStatus->likes->count();
-            return Response::json(array('count_like' => $response));
+            $redis = LRedis::connection();
+            $data = ['like' => $response, 'status_id' => Input::get('status_id')];
+            $redis->publish('like', json_encode($data));
+            return response()->json([]);
         } else {
             $like = new Like();
             $like->user_id = Auth::user()->id;
@@ -132,7 +112,11 @@ class PostController extends Controller
         }
 
         $response = $seStatus->likes->count();
-        return Response::json(array('count_like' => $response));
+        $redis = LRedis::connection();
+        $data = ['like' => $response, 'status_id' => Input::get('status_id')];
+        $redis->publish('like', json_encode($data));
+        return response()->json([]);
+        //return Response::json(array('count_like' => $response));
         //return redirect()->back();
     }
 
@@ -154,7 +138,10 @@ class PostController extends Controller
             });
             $delikecm->delete();
             $response = $selComment->likes->count();
-            return Response::json(array('count_like' => $response));
+            $redis = LRedis::connection();
+            $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id')];
+            $redis->publish('likecm', json_encode($data));
+            return response()->json([]);
         } else {
             $likecm = new LikeComment();
             $likecm->user_id = Auth::user()->id;
@@ -163,7 +150,10 @@ class PostController extends Controller
         }
 
         $response = $selComment->likes->count();
-        return Response::json(array('count_like' => $response));
+        $redis = LRedis::connection();
+        $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id')];
+        $redis->publish('likecm', json_encode($data));
+        return response()->json([]);
     }
 
 }

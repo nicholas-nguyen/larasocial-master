@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Input;
 use Validator;
 use App\Users;
 use App\Http\Requests;
@@ -37,13 +38,45 @@ class UserController extends Controller
             $users->password = Hash::make($dulieu_dk["Password"]);
 
             $users->save();
-            \Session::flash('messages','Bạn đã đăng ký thành công!!! Hãy đăng nhập ngay bây giờ!!!');
-            return redirect('login');
-
+//            \Session::flash('messages','Bạn đã đăng ký thành công!!! Hãy đăng nhập ngay bây giờ!!!');
+//            return redirect('login');
+            Auth::login($users);
         } else {
             return redirect('register')
                 ->withErrors($validator)
                 ->withInput();
+        }
+    }
+
+    public function changePassword(Request $request){
+        $user = Users::find(Auth::user()->id);
+
+        $validator = Validator::make($request->all(), [
+            'current_password' => 'required',
+            'new_password' => 'required',
+            'retype_password' => 'required|same:new_password'
+        ]);
+
+        if ($validator->fails())
+        {
+            \Session::flash('messages',$validator);
+            return redirect()->back();
+        }
+        else
+        {
+
+            if (!Hash::check(Input::get('current_password'), $user->password))
+            {
+                \Session::flash('messages','Your old password does not match');
+                return redirect()->back();
+            }
+            else
+            {
+                $user ->password = Hash::make(Input::get('new_password'));
+                $user -> save();
+                \Session::flash('messages',"Password have been changed");
+                return redirect()->back();
+            }
         }
     }
 }

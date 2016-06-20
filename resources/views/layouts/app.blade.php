@@ -52,7 +52,7 @@ desired effect
 
     @include('layouts.partials.controlsidebar')
 
-    @include('layouts.partials.footer')
+    {{--@include('layouts.partials.footer')--}}
 
 </div><!-- ./wrapper -->
 

@@ -19,18 +19,18 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-//Route::get('home',[
-//    'uses' => 'PostController@postStatus',
-//    'as'   => 'home',
-//    'middleware' => ['auth'],
-//]);
 Route::get('login','AuthController@getLogin');
 Route::get('register','AuthController@getRegister');
 Route::post('post-register','UserController@postRegister');
 Route::post('post-login','AuthController@postLogin');
-Route::any('dashboard','PostController@postStatus');
 Route::get('logout','AuthController@postLogout');
 Route::post('search','SearchController@getResults');
+Route::any('dashboard',[
+    'uses'   => 'PostController@postStatus',
+    'as'     => 'dashboard',
+    'middleware' => ['auth'],
+]);
+
 Route::post('/post/article',[
     'uses'   => 'PostController@postArticle',
     'as'     => '/post/article',
@@ -69,7 +69,7 @@ Route::get('/friends/accept/{id}',[
     'middleware' => ['auth'],
 ]);
 
-Route::post('/friends/delete/{id}',[
+Route::get('/friends/delete/{id}',[
     'uses'   => 'FriendController@postDelete',
     'as'     => 'friends.delete',
     'middleware' => ['auth'],
@@ -86,12 +86,18 @@ Route::post('/comment/like',[
     'middleware' => ['auth'],
 ]);
 
+Route::post('/change-password',[
+    'uses'   => 'UserController@changePassword',
+    'as'     => '/change-password',
+    'middleware' => ['auth'],
+]);
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
 });
 Route::post('sendmessage', 'chatController@sendMessage');
+
 
 
 

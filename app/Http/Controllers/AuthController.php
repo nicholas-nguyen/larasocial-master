@@ -22,13 +22,13 @@ class AuthController extends Controller
     public function postLogin(Request $request){
         $remember = (Input::has('remember')) ? true : false;
         $validator = Validator::make($request->all(), [
-            'email' => 'required|regex:/^[a-z][a-z0-9]*(_[a-z0-9]+)*(\.[a-z0-9]+)*@[a-z0-9]([a-z0-9-][a-z0-9]+)*(\.[a-z]{2,4}){1,2}$/',
-            'password' => 'required|min:6',
+            'Email' => 'required|regex:/^[a-z][a-z0-9]*(_[a-z0-9]+)*(\.[a-z0-9]+)*@[a-z0-9]([a-z0-9-][a-z0-9]+)*(\.[a-z]{2,4}){1,2}$/',
+            'Password' => 'required|min:6',
         ]);
 
         if ($validator->passes()) {
 
-            if (Auth::attempt(['email' => $request['email'], 'password' => $request['password']],$remember)) {
+            if (Auth::attempt(['email' => $request['Email'], 'password' => $request['Password']],$remember)) {
                 // Authentication passed...
                 return redirect()->intended('dashboard');
             } else {

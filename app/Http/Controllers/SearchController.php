@@ -7,16 +7,17 @@ use Illuminate\Support\Facades\Input;
 use App\Users;
 use DB;
 use App\Http\Requests;
+use Illuminate\Support\Str;
 
 class SearchController extends Controller
 {
-    public function getResults(Request $request){
-        $keyword = Input::get('keyword');
-        if(!$keyword){
-            return redirect('dashboard');
-        }
-        $users = Users::where(DB::raw("CONCAT(firstname,' ',lastname)"),"LIKE","%{$keyword}%")->get();
+    public function getResults(){
+        $keyword = Input::get('search_text');
+//        if(!$keyword){
+//            return redirect('dashboard');
+//        }
+        $result = Users::where(DB::raw("CONCAT(firstname,' ',lastname)"),"LIKE","%{$keyword}%")->get();
 
-        return view('pages.results')->with('users',$users);
+        return view('pages.results')->with('result',$result);
     }
 }

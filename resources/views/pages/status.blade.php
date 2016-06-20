@@ -1,15 +1,15 @@
 <div class="post">
     <div class="user-block">
         <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <div class="username">
-                            <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
-                            @if(Auth::user()->id == $status->user->id)
-                                <a href="{{ route('/delete/article', ['id' => $status->id]) }}"
-                                   class="pull-right btn-box-tool" onclick="return accept()"><i class="fa fa-times"></i></a>
-                                <a href="#" class="pull-right btn-box-tool btn-edit-status"><i
-                                            class="fa fa-edit"></i></a>
-                            @endif
-                        </div>
+        <div class="username">
+            <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
+            @if(Auth::user()->id == $status->user->id)
+                <a href="{{ route('/delete/article', ['id' => $status->id]) }}"
+                   class="pull-right btn-box-tool" onclick="return accept()"><i class="fa fa-times"></i></a>
+                <a href="#" class="pull-right btn-box-tool btn-edit-status"><i
+                            class="fa fa-edit"></i></a>
+            @endif
+        </div>
         <span class="description">{{ $status->created_at->diffForHumans() }}</span>
     </div>
     <!-- /.user-block -->
@@ -59,10 +59,10 @@
                             <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
 
                             <div class="comment-text">
-                      <span class="username">
-                        <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ \App\Users::find($comment->user_id)->firstname }} {{ \App\Users::find($comment->user_id)->lastname }}</a>
-                          <span class="text-muted pull-right">{{ $comment->created_at->diffForHumans() }}</span>
-                      </span><!-- /.username -->
+                              <span class="username">
+                                <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ \App\Users::find($comment->user_id)->firstname }} {{ \App\Users::find($comment->user_id)->lastname }}</a>
+                                  <span class="text-muted pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                              </span><!-- /.username -->
                                 {{ $comment->comment }}
                             </div>
                             <div style="margin-left: 40px;">
@@ -111,8 +111,7 @@
 <script type="text/javascript">
     function accept() {
         return confirm('Are you sure?');
-    }
-    ;
+    };
 
 </script>
 <style>
