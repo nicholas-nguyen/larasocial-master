@@ -1,6 +1,6 @@
-<div class="post">
+<div class="post" id="post_status">
     <div class="user-block">
-        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
+        <img class="img-circle img-bordered-sm" src="public/img/user1-128x128.jpg" alt="user image">
         <div class="username">
             <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
             @if(Auth::user()->id == $status->user->id)
@@ -13,9 +13,11 @@
         <span class="description">{{ $status->created_at->diffForHumans() }}</span>
     </div>
     <!-- /.user-block -->
-    <p style="margin-left: 40px;">
+    <span id="body_status" style="margin-left: 40px;">
         {{ $status->body }}
-    </p>
+        <input type="hidden" id="id_of_status" name="id_of_status" value="{{ $status->id }}">
+    </span>
+
     <ul class="list-inline">
         <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
         <li>
@@ -90,18 +92,22 @@
 <div class="modal" id="editModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Default Modal</h4>
-            </div>
-            <div class="modal-body">
-                <textarea id="textareastatus" name="textareastatus"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form action="{{ url('/edit/article') }}" method="post" id="edit_status_form">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit status</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="area_edit_status" name="area_edit_status"></textarea>
+                    <input type="hidden" id="edit_status_id" name="edit_status_id" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary saveChangeStatus">Save changes</button>
+                </div>
+            </form>
         </div>
         <!-- /.modal-content -->
     </div>
@@ -111,12 +117,23 @@
 <script type="text/javascript">
     function accept() {
         return confirm('Are you sure?');
-    };
+    }
+    ;
 
 </script>
 <style>
     .text-sm:hover {
         cursor: pointer;
         color: #00c0ef;
+    }
+
+    #area_edit_status {
+        border: 1px #ddd solid;
+        top: 5px;
+        width: 100%;
+        height: auto;
+        left: 5px;
+        font: 9pt Consolas;
+        resize: none;
     }
 </style>

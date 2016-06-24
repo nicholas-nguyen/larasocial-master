@@ -2,6 +2,7 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var redis = require('redis');
+var requestify = require('requestify');
 
 
 
@@ -13,9 +14,19 @@ io.on('connection', function (socket) {
     redisClient.subscribe('message');
     redisClient.subscribe('like');
     redisClient.subscribe('likecm');
+    redisClient.subscribe('editStatus');
     
     redisClient.on("message", function(channel, data) {
-        console.log("new message add in queue "+ data['message'] + " channel");
+
+            /*requestify.post('http://localhost:8080/larasocial-master/messages', {
+                message: data.message,
+                sender_id: data.my_id,
+                reciver_id: data.user_id
+            })
+            .then(function (response) {
+                console.log(response.getBody());
+            });*/
+
         socket.emit(channel, data);
     });
 

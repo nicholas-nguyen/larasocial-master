@@ -36,6 +36,11 @@ Route::post('/post/article',[
     'as'     => '/post/article',
     'middleware' => ['auth'],
 ]);
+Route::post('/edit/article',[
+    'uses'   => 'PostController@editArticle',
+    'as'     => '/edit/article',
+    'middleware' => ['auth'],
+]);
 Route::get('/delete/article/{id}',[
     'uses'   => 'PostController@deleteArticle',
     'as'     => '/delete/article',
@@ -96,7 +101,11 @@ Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::get('/home', 'HomeController@index');
 });
-Route::post('sendmessage', 'chatController@sendMessage');
+Route::post('sendmessage', 'ChatController@sendMessage');
+
+Route::get('message/list','MessageController@getList');
+Route::resource('messages','MessageController');
+
 
 
 

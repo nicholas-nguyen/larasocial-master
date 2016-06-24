@@ -231,60 +231,83 @@
                     {{--</div>--}}
                     <!-- /.tab-pane -->
 
-                    {{--<div class="tab-pane" id="settings">--}}
-                    {{--<form class="form-horizontal">--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputName" class="col-sm-2 control-label">Name</label>--}}
+                        <div class="tab-pane" id="settings">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>
 
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input type="email" class="form-control" id="inputName" placeholder="Name">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputEmail" class="col-sm-2 control-label">Email</label>--}}
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputFirstname"
+                                               placeholder="Firsname">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputLastname" class="col-sm-2 control-label">Lastname</label>
 
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input type="email" class="form-control" id="inputEmail" placeholder="Email">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputName" class="col-sm-2 control-label">Name</label>--}}
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputLastname"
+                                               placeholder="Lastname">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
 
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input type="text" class="form-control" id="inputName" placeholder="Name">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputExperience" class="col-sm-2 control-label">Experience</label>--}}
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" id="inputBirthday"
+                                               placeholder="Birthday">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputGender" class="col-sm-2 control-label">Gender</label>
 
-                    {{--<div class="col-sm-10">--}}
-                    {{--<textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<label for="inputSkills" class="col-sm-2 control-label">Skills</label>--}}
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="inputGender">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputHometown" class="col-sm-2 control-label">Hometown</label>
 
-                    {{--<div class="col-sm-10">--}}
-                    {{--<input type="text" class="form-control" id="inputSkills" placeholder="Skills">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                    {{--<div class="checkbox">--}}
-                    {{--<label>--}}
-                    {{--<input type="checkbox"> I agree to the <a href="#">terms and conditions</a>--}}
-                    {{--</label>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="form-group">--}}
-                    {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                    {{--<button type="submit" class="btn btn-danger">Submit</button>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</form>--}}
-                    {{--</div>--}}
-                    <!-- /.tab-pane -->
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputHometown"
+                                               placeholder="Hometown">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputCurentcity"
+                                               placeholder="Curent city">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputSkills"
+                                               placeholder="Skills">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"> I agree to the <a href="#">terms and
+                                                    conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-danger">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                     <!-- /.tab-content -->
                 </div>

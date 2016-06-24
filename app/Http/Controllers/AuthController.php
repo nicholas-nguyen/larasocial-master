@@ -16,7 +16,7 @@ class AuthController extends Controller
     }
 
     public function getRegister(){
-        return view('pages.register');
+        return view('auth.register');
     }
 
     public function postLogin(Request $request){

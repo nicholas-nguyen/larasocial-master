@@ -35,11 +35,11 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{ url('dashboard') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><b>D</b>SN</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admin</b>LTE</span>
+            <span class="logo-lg"><b>Demo</b>Social Network</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -67,7 +67,7 @@
                                     <li><!-- start message -->
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle"
+                                                <img src="public/img/user2-160x160.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -81,7 +81,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="public/img/user3-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -94,7 +94,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="public/img/user4-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -107,7 +107,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user3-128x128.jpg" class="img-circle"
+                                                <img src="public/img/user3-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -120,7 +120,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="../../dist/img/user4-128x128.jpg" class="img-circle"
+                                                <img src="public/img/user4-128x128.jpg" class="img-circle"
                                                      alt="User Image">
                                             </div>
                                             <h4>
@@ -263,13 +263,13 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <img src="public/img/user2-160x160.jpg" class="user-image" alt="User Image">
                             <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="public/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
@@ -357,7 +357,7 @@
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
                             <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            {{--<li><a href="#settings" data-toggle="tab">Settings</a></li>--}}
                         </ul>
 
 
@@ -387,7 +387,11 @@
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <input type="file" name="images" value="Picture">
+                                            <label class="btn btn-success">
+                                                Picture
+                                                <input type="file" name="images" style="display: none;">
+                                            </label>
+
                                             <button type="submit" class="btn btn-info pull-right">Post</button>
                                         </div>
                                         <!-- /.box-footer -->
@@ -508,83 +512,83 @@
                             </div>
                             <!-- /.tab-pane -->
 
-                            <div class="tab-pane" id="settings">
-                                <form class="form-horizontal">
-                                    <div class="form-group">
-                                        <label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>
+                            {{--<div class="tab-pane" id="settings">--}}
+                                {{--<form class="form-horizontal">--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputFirstname"
-                                                   placeholder="Firsname">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputLastname" class="col-sm-2 control-label">Lastname</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="text" class="form-control" id="inputFirstname"--}}
+                                                   {{--placeholder="Firsname">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputLastname" class="col-sm-2 control-label">Lastname</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputLastname"
-                                                   placeholder="Lastname">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="text" class="form-control" id="inputLastname"--}}
+                                                   {{--placeholder="Lastname">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="date" class="form-control" id="inputBirthday"
-                                                   placeholder="Birthday">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputGender" class="col-sm-2 control-label">Gender</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="date" class="form-control" id="inputBirthday"--}}
+                                                   {{--placeholder="Birthday">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputGender" class="col-sm-2 control-label">Gender</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <select class="form-control" id="inputGender">
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputHometown" class="col-sm-2 control-label">Hometown</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<select class="form-control" id="inputGender">--}}
+                                                {{--<option value="Male">Male</option>--}}
+                                                {{--<option value="Female">Female</option>--}}
+                                            {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputHometown" class="col-sm-2 control-label">Hometown</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputHometown"
-                                                   placeholder="Hometown">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="text" class="form-control" id="inputHometown"--}}
+                                                   {{--placeholder="Hometown">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputCurentcity"
-                                                   placeholder="Curent city">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="text" class="form-control" id="inputCurentcity"--}}
+                                                   {{--placeholder="Curent city">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<label for="inputSkills" class="col-sm-2 control-label">Skills</label>--}}
 
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills"
-                                                   placeholder="Skills">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and
-                                                        conditions</a>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
+                                        {{--<div class="col-sm-10">--}}
+                                            {{--<input type="text" class="form-control" id="inputSkills"--}}
+                                                   {{--placeholder="Skills">--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                                            {{--<div class="checkbox">--}}
+                                                {{--<label>--}}
+                                                    {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
+                                                        {{--conditions</a>--}}
+                                                {{--</label>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="form-group">--}}
+                                        {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                                            {{--<button type="submit" class="btn btn-danger">Submit</button>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</form>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -594,27 +598,6 @@
                     <!-- /.box -->
 
 
-                {{--<aside class="main-sidebar">--}}
-                <!-- sidebar: style can be found in sidebar.less -->
-                {{--<section class="sidebar">--}}
-                <!-- Sidebar user panel -->
-
-                    <!-- sidebar menu: : style can be found in sidebar.less -->
-                    {{--<ul class="sidebar-menu">--}}
-                    {{--<li class="header">FRIENDS CHAT</li>--}}
-                    {{--@foreach($friends as $friend)--}}
-                    {{--<li class="active treeview">--}}
-                    {{--<a href="#">--}}
-                    {{--<img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg"--}}
-                    {{--alt="User Image">--}}
-                    {{--<span class="username">--}}
-                    {{--{{ $friend->firstname }} {{ $friend->lastname }}--}}
-                    {{--</span>--}}
-                    {{--</a>--}}
-                    {{--</li>--}}
-                    {{--@endforeach--}}
-                    {{--</ul>--}}
-                    {{--</section>--}}
                     <div class="box box-default collapsed-box box-solid">
                         <div class="box-header with-border">
                             <h3 class="box-title">FRIENDS CHAT</h3>
@@ -636,6 +619,7 @@
                                         <span class="username">
                                         {{ $friend->firstname }} {{ $friend->lastname }}
                                         </span>
+                                        <input type="hidden" id="friend_id" value="{{ $friend->id }}">
                                     </a>
                                 </div>
                             @endforeach
@@ -690,7 +674,7 @@
                             <i class="menu-icon fa fa-user bg-yellow"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                     ipt        <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
 
                                 <p>New phone +1(800)555-1234</p>
                             </div>
@@ -928,7 +912,7 @@
     /*.margin-5 {*/
     /*margin-right: 15px;*/
     /*}*/
-    #textareastatus {
+    #textareastatus  {
         border: 1px #ddd solid;
         top: 5px;
         width: 100%;
@@ -938,98 +922,160 @@
         resize: none;
     }
 
-    @media only screen and (max-width: 540px) {
-        .chat-sidebar {
-            display: none !important;
-        }
 
-        .chat-popup {
-            display: none !important;
-        }
-    }
-
-    body {
-        background-color: #e9eaed;
-    }
-
-    .chat-sidebar {
-        width: 200px;
-        position: fixed;
-        height: 100%;
-        right: 0px;
-        top: 0px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        border: 1px solid rgba(29, 49, 91, .3);
-    }
-
-    .sidebar-name {
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-bottom: 4px;
-        font-size: 12px;
-    }
-
-    .sidebar-name span {
-        padding-left: 5px;
-    }
-
-    .sidebar-name a {
-        display: block;
-        height: 100%;
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .sidebar-name:hover {
-        background-color: #5bc0de;
-    }
-
-    .sidebar-name img {
-        width: 32px;
-        height: 32px;
-        vertical-align: middle;
-    }
-
-    .popup-box {
-        display: none;
-        position: fixed;
-        bottom: 0px;
-        right: 220px;
-        height: 285px;
-        background-color: rgb(237, 239, 244);
-        width: 300px;
-        border: 1px solid rgba(29, 49, 91, .3);
-    }
-
-    .popup-box .popup-head {
-        background-color: #6d84b4;
-        padding: 5px;
-        color: white;
-        font-weight: bold;
-        font-size: 14px;
-        clear: both;
-    }
-
-    .popup-box .popup-head .popup-head-left {
-        float: left;
-    }
-
-    .popup-box .popup-head .popup-head-right {
-        float: right;
-        opacity: 0.5;
-    }
-
-    .popup-box .popup-head .popup-head-right a {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    .popup-box .popup-messages {
-        height: 100%;
-        overflow-y: scroll;
-    }
 </style>
 
+<div id="chat-popup" style="
+    position: fixed;
+    height: auto;
+    right: 0;
+    bottom: 0;
+    z-index: 999999999;">
+    <div id="temp" class="pop-item hidden" style="width: 260px;">
+        <div class="box box-primary direct-chat direct-chat-primary" style="margin-bottom: 0px;">
+            <div class="box-header with-border">
+                <h3 class="box-title">Direct Chat</h3>
+
+                <div class="box-tools pull-right">
+                    <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts"
+                            data-widget="chat-pane-toggle">
+                        <i class="fa fa-comments"></i></button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                    <!-- Message. Default to the left -->
+                    <div class="direct-chat-msg left">
+                    {{--<div class="direct-chat-info clearfix">--}}
+                    {{--<span class="direct-chat-name pull-left">Alexander Pierce</span>--}}
+                    {{--<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.direct-chat-info -->--}}
+                    {{--<img class="direct-chat-img" src="public/img/user1-128x128.jpg" alt="Message User Image">--}}
+                    {{--<!-- /.direct-chat-img -->--}}
+                    {{--<div class="direct-chat-text">--}}
+                    {{--Is this template really for free? That's unbelievable!--}}
+                    {{--</div>--}}
+                    <!-- /.direct-chat-text -->
+                    </div>
+                    <!-- /.direct-chat-msg -->
+
+                    <!-- Message to the right -->
+                    <div class="direct-chat-msg right" id="messages">
+                    {{--<div class="direct-chat-info clearfix">--}}
+                    {{--<span class="direct-chat-name pull-right" id="user"></span>--}}
+                    {{--<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>--}}
+                    {{--</div>--}}
+                    {{--<!-- /.direct-chat-info -->--}}
+                    {{--<img class="direct-chat-img" src="public/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->--}}
+                    {{--<div class="direct-chat-text">--}}
+
+                    {{--</div>--}}
+                    <!-- /.direct-chat-text -->
+                    </div>
+
+                    <!-- /.direct-chat-msg -->
+                </div>
+                <!--/.direct-chat-messages-->
+
+
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <input type="hidden" id="my_id" name="my_id" value="{{ Auth::user()->id }}">
+                        <input type="hidden" name="chat_id" id="user_recived" value="">
+                        <input type="hidden" name="user_name" value="{{ Auth::user()->firstname }}">
+                        <input type="text" name="msg" placeholder="Type Message ..." class="form-control msg msg-box-chat">
+                      <span class="input-group-btn">
+						  <input type="button" value="Send" class="btn btn-primary btn-flat send-msg">
+                      </span>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-footer-->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //Open chat box
+    $(document).on('click', '.list-group-item', function () {
+        var $temp_pop = $('#temp');
+        //Remove other pop
+        $('#chat-popup').find('.pop-item:not(:hidden)').remove();
+
+        //Clone pop
+        var $clone = $temp_pop.clone();
+        $clone.removeClass('hidden');
+        $clone.attr('id', '');
+        var chatid = $(this).find('#friend_id').val();
+        console.log(chatid);
+        //$clone.find('span.direct-chat-name').text(chatid);
+        //$clone.find("#user_recived").val(chatid);
+
+        var text = $(this).find('.username').text();
+        $clone.find('h3.box-title').text(text);
+        $('#chat-popup').append($clone);
+        $("#chat-popup").find("#user_recived").val(chatid);
+    });
+
+    //Remove chat box
+    $(document).on('click', 'button[data-widget="remove"]', function () {
+        var $this = $(this);
+        var $box = $this.closest('div.box');
+        $box.remove();
+    });
+
+    //
+    var socket = io.connect('http://localhost:8890');
+    socket.on('message', function (data) {
+        data = jQuery.parseJSON(data);
+        console.log(data);
+        var chatid = $("#chat-popup").find("#user_recived").val();
+        if (parseInt(data.user_id) == parseInt($("input[name='my_id']").val()) && parseInt(data.my_id) == parseInt(chatid)) {
+            var message = "<div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
+                    + data.user_name + "</span> </div>"
+                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + data.message + "</div>";
+
+            $("#chat-popup").find(".direct-chat-msg.right").append(message);
+        }
+    });
+    $(document).on('click', ".send-msg", function (e) {
+        e.preventDefault();
+        $this = $(this).closest("#chat-popup");
+        var token = $($this).find("input[name='_token']").val();
+        var my_id = $($this).find("input[name='my_id']").val();
+        var user_id = $($this).find("input[name='chat_id']").val();
+        var user_name = $($this).find("input[name='user_name']").val();
+        var msg =  $(this).parent().prev().val();
+        if (msg != '') {
+            $.ajax({
+                type: "POST",
+                url: '{!! URL::to("sendmessage") !!}',
+                dataType: "json",
+                data: {'_token': token, 'message': msg, 'user_name': user_name, 'user_id': user_id, 'my_id': my_id},
+                success: function (data) {
+                    $(".msg").val('');
+                    var message = "<div style='clear: both;'></div><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
+                            + "You" + "</span> </div>"
+                            + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + msg + "</div>";
+                    $("#chat-popup").find(".direct-chat-msg.right").append(message);
+                }
+            });
+        } else {
+            alert("Please Add Message!");
+        }
+    })
+</script>
 </body>
 </html>

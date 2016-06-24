@@ -82,6 +82,18 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
+    public function editArticle(){
+        $edit_id = Input::get("edit_status_id");
+        $edit_body = Input::get("area_edit_status");
+        
+        $status = Status::find('id',$edit_id);
+        $status->body = $edit_body;
+        $status->save();
+
+        \Session::flash('messages',"Status have been changed");
+        return redirect()->back();
+    }
     /**
      * @return mixed
      */
