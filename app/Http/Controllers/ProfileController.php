@@ -7,6 +7,7 @@ use App\Users;
 use App\Http\Requests;
 use App\Status;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class ProfileController extends Controller
 {
@@ -19,8 +20,20 @@ class ProfileController extends Controller
         return view('users.profile-user')->with('user',$user)->with('status_user',$status_user);
     }
 
-    public function getEdit(){
-        return view('users.edit-profile');
+    public function editProfile(){
+        $user = Users::find(Auth::user()->id);
+
+        $user->firstname = Input::get("inputFirstname");
+        $user->lastname = Input::get("inputLastname");
+        $user->birthday = Input::get("inputBirthday");
+        $user->gender = Input::get("selectGender");
+        $user->hometown = Input::get("inputHometown");
+        $user->currentcity = Input::get("inputCurentcity");
+
+        $user->save();
+
+        \Session::flash('messages',"User information have been changed");
+        return redirect()->back();
     }
 
     public function postEdit(){

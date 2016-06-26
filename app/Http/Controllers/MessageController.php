@@ -16,8 +16,10 @@ class MessageController extends ApiController
 
     public function getList(Request $request){
         $message = \DB::table('messages')->select("messages.*")
-                ->where('messages.sender_id',$request->input('id'))
-                ->orWhere('messages.reciver_id',$request->input('id'))
+                ->where('messages.sender_id',Auth::user()->id)
+                ->Where('messages.reciver_id',$request->input('id'))
+                ->orwhere('messages.sender_id',$request->input('id'))
+                ->Where('messages.reciver_id',Auth::user()->id)
                 ->orderBy('messages.created_at','ASC')
                 ->paginate(10);
 

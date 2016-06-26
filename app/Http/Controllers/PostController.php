@@ -33,6 +33,7 @@ class PostController extends Controller
 
     public function postArticle()
     {
+        
         If (Input::has('status')) {
             $text = e(Input::get('status'));
             if ($text != null) {

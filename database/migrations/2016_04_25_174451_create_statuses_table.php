@@ -16,6 +16,7 @@ class CreateStatusesTable extends Migration
             $table->increments('id');
             $table->string('body');
             $table->integer('user_id')->unsigned();
+            $table->string('image_url');
             $table->timestamps();
         });
     }

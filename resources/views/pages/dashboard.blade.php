@@ -27,9 +27,11 @@
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<script src="{{ asset('public/css/jquery-ui.css') }}"></script>
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 <script src="{{ asset('public/js/jquery-2.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
+<script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('public/js/tool.js') }}"></script>
 <div class="wrapper">
 
@@ -351,13 +353,11 @@
 
                 <div class="col-md-9">
                     <!---->
-                    @if(Session::has('messages'))
-                        <div class="alert alert-success">{{ Session::get('messages') }}</div>
-                    @endif
+
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
-                            <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                            {{--<li><a href="#timeline" data-toggle="tab">Timeline</a></li>--}}
                             {{--<li><a href="#settings" data-toggle="tab">Settings</a></li>--}}
                         </ul>
 
@@ -386,13 +386,13 @@
                                             <textarea id="textareastatus" name="status"
                                                       placeholder="What are you thinking?"></textarea>
                                         </div>
+                                        <img id="blah" src="" alt=""/>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
                                             <label class="btn btn-success">
                                                 Picture
-                                                <input type="file" name="images" style="display: none;">
+                                                <input type="file" name="images_upload" style="display: none;" onchange="readURL(this);">
                                             </label>
-
                                             <button type="submit" class="btn btn-info pull-right">Post</button>
                                         </div>
                                         <!-- /.box-footer -->
@@ -908,6 +908,20 @@
         $('#textareastatus').autoGrow();
     });
 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 <style type="text/css">
     /*.margin-5 {*/
@@ -1037,7 +1051,6 @@
                                 + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
                     }
                 });
-                console.log(messages);
 
                 $("#chat-popup").find(".direct-chat-messages").append(messages);
             }
