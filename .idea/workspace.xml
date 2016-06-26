@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e873e6a2-e7f0-4374-bef2-e0b9470b183e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/pages/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/pages/dashboard.blade.php" />
-    </list>
+    <list default="true" id="e873e6a2-e7f0-4374-bef2-e0b9470b183e" name="Default" comment="" />
     <ignored path="larasocial.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -680,12 +677,12 @@
       <workItem from="1466777074613" duration="11562000" />
       <workItem from="1466839397712" duration="6681000" />
       <workItem from="1466855301242" duration="20674000" />
-      <workItem from="1466946803281" duration="10927000" />
+      <workItem from="1466946803281" duration="11292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="395907000" />
+    <option name="totallyTimeSpent" value="396272000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
