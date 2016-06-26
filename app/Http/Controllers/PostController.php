@@ -33,18 +33,22 @@ class PostController extends Controller
 
     public function postArticle()
     {
-        
-        If (Input::has('status')) {
-            $text = e(Input::get('status'));
-            if ($text != null) {
-                $status = new Status();
-                $status->body = $text;
-                $status->user_id = Auth::user()->id;
+        if(Input::hasFile('photo')){
 
-                $status->save();
-                return redirect('dashboard');
-            } else {
-                return redirect()->back();
+        }
+        else {
+            If (Input::has('status')) {
+                $text = e(Input::get('status'));
+                if ($text != null) {
+                    $status = new Status();
+                    $status->body = $text;
+                    $status->user_id = Auth::user()->id;
+
+                    $status->save();
+                    return redirect('dashboard');
+                } else {
+                    return redirect()->back();
+                }
             }
         }
         return redirect()->back();

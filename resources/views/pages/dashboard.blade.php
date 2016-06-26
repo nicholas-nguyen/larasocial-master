@@ -386,7 +386,7 @@
                                             <textarea id="textareastatus" name="status"
                                                       placeholder="What are you thinking?"></textarea>
                                         </div>
-                                        <img id="blah" src="" alt=""/>
+                                        <img id="blah" src="" alt="" style="padding-left: 10px;"/>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
                                             <label class="btn btn-success">
