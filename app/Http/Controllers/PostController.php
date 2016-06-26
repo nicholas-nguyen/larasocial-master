@@ -26,7 +26,7 @@ class PostController extends Controller
         $friends = $user->friends();
         $statuses = Status::where(function ($query) {
             return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Users::where('id', Auth::user()->id)->first()->friends()->lists('id'));
-        })->orderBy('created_at', 'desc')->paginate(11);
+        })->orderBy('created_at', 'desc')->simplePaginate(10);
 
         return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends);
     }
@@ -83,16 +83,17 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function editArticle(){
-        $edit_id = Input::get("edit_status_id");
-        $edit_body = Input::get("area_edit_status");
-        
-        $status = Status::find('id',$edit_id);
-        $status->body = $edit_body;
+    public function editArticle(Request $request){
+        $edit_id = Input::get("id_edit_status");
+        $status = Status::find($edit_id);
+
+
+        $status->body = Input::get("area_edit_status");
         $status->save();
 
         \Session::flash('messages',"Status have been changed");
         return redirect()->back();
+//        return response()->json(array('newbody' => $status->body),200);
     }
     /**
      * @return mixed

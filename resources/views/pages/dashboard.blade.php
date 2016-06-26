@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | User Profile</title>
+    <title>Demo Social Network | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -348,11 +348,12 @@
         <section class="content">
 
             <div class="row">
-                @if(Session::has('messages'))
-                    <div class="alert alert-success">{{ Session::get('messages') }}</div>
-                @endif
+
                 <div class="col-md-9">
                     <!---->
+                    @if(Session::has('messages'))
+                        <div class="alert alert-success">{{ Session::get('messages') }}</div>
+                    @endif
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
@@ -409,7 +410,7 @@
                                        ])
                                     !!}
                                 @endforeach
-
+                                {{ $statuses->render() }}
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="timeline">
@@ -513,81 +514,81 @@
                             <!-- /.tab-pane -->
 
                             {{--<div class="tab-pane" id="settings">--}}
-                                {{--<form class="form-horizontal">--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>--}}
+                            {{--<form class="form-horizontal">--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="text" class="form-control" id="inputFirstname"--}}
-                                                   {{--placeholder="Firsname">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputLastname" class="col-sm-2 control-label">Lastname</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" class="form-control" id="inputFirstname"--}}
+                            {{--placeholder="Firsname">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputLastname" class="col-sm-2 control-label">Lastname</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="text" class="form-control" id="inputLastname"--}}
-                                                   {{--placeholder="Lastname">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" class="form-control" id="inputLastname"--}}
+                            {{--placeholder="Lastname">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="date" class="form-control" id="inputBirthday"--}}
-                                                   {{--placeholder="Birthday">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputGender" class="col-sm-2 control-label">Gender</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="date" class="form-control" id="inputBirthday"--}}
+                            {{--placeholder="Birthday">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputGender" class="col-sm-2 control-label">Gender</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<select class="form-control" id="inputGender">--}}
-                                                {{--<option value="Male">Male</option>--}}
-                                                {{--<option value="Female">Female</option>--}}
-                                            {{--</select>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputHometown" class="col-sm-2 control-label">Hometown</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<select class="form-control" id="inputGender">--}}
+                            {{--<option value="Male">Male</option>--}}
+                            {{--<option value="Female">Female</option>--}}
+                            {{--</select>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputHometown" class="col-sm-2 control-label">Hometown</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="text" class="form-control" id="inputHometown"--}}
-                                                   {{--placeholder="Hometown">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" class="form-control" id="inputHometown"--}}
+                            {{--placeholder="Hometown">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="text" class="form-control" id="inputCurentcity"--}}
-                                                   {{--placeholder="Curent city">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<label for="inputSkills" class="col-sm-2 control-label">Skills</label>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" class="form-control" id="inputCurentcity"--}}
+                            {{--placeholder="Curent city">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<label for="inputSkills" class="col-sm-2 control-label">Skills</label>--}}
 
-                                        {{--<div class="col-sm-10">--}}
-                                            {{--<input type="text" class="form-control" id="inputSkills"--}}
-                                                   {{--placeholder="Skills">--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                                            {{--<div class="checkbox">--}}
-                                                {{--<label>--}}
-                                                    {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
-                                                        {{--conditions</a>--}}
-                                                {{--</label>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="form-group">--}}
-                                        {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                                            {{--<button type="submit" class="btn btn-danger">Submit</button>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</form>--}}
+                            {{--<div class="col-sm-10">--}}
+                            {{--<input type="text" class="form-control" id="inputSkills"--}}
+                            {{--placeholder="Skills">--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                            {{--<div class="checkbox">--}}
+                            {{--<label>--}}
+                            {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
+                            {{--conditions</a>--}}
+                            {{--</label>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                            {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                            {{--<button type="submit" class="btn btn-danger">Submit</button>--}}
+                            {{--</div>--}}
+                            {{--</div>--}}
+                            {{--</form>--}}
                             {{--</div>--}}
                         </div>
                     </div>
@@ -613,7 +614,7 @@
                         <div class="box-body">
                             @foreach($friends as $friend)
                                 <div class="list-group-item">
-                                    <a href="#">
+                                    <a>
                                         <img class="img-circle img-sm" src="public/img/user3-128x128.jpg"
                                              alt="User Image">
                                         <span class="username">
@@ -674,7 +675,7 @@
                             <i class="menu-icon fa fa-user bg-yellow"></i>
 
                             <div class="menu-info">
-                     ipt        <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
+                                ipt <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
 
                                 <p>New phone +1(800)555-1234</p>
                             </div>
@@ -912,7 +913,7 @@
     /*.margin-5 {*/
     /*margin-right: 15px;*/
     /*}*/
-    #textareastatus  {
+    #textareastatus {
         border: 1px #ddd solid;
         top: 5px;
         width: 100%;
@@ -920,6 +921,9 @@
         left: 5px;
         font: 9pt Consolas;
         resize: none;
+    }
+    .list-group-item a:hover{
+        cursor:pointer;
     }
 
 
@@ -931,13 +935,13 @@
     right: 0;
     bottom: 0;
     z-index: 999999999;">
-    <div id="temp" class="pop-item hidden" style="width: 260px;">
+    <div id="temp" class="pop-item hidden" style="width: 270px;">
         <div class="box box-primary direct-chat direct-chat-primary" style="margin-bottom: 0px;">
             <div class="box-header with-border">
                 <h3 class="box-title">Direct Chat</h3>
 
                 <div class="box-tools pull-right">
-                    <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
+                    {{--<span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>--}}
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Contacts"
@@ -950,35 +954,14 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages">
+                <div class="direct-chat-messages" >
                     <!-- Message. Default to the left -->
                     <div class="direct-chat-msg left">
-                    {{--<div class="direct-chat-info clearfix">--}}
-                    {{--<span class="direct-chat-name pull-left">Alexander Pierce</span>--}}
-                    {{--<span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>--}}
-                    {{--</div>--}}
-                    {{--<!-- /.direct-chat-info -->--}}
-                    {{--<img class="direct-chat-img" src="public/img/user1-128x128.jpg" alt="Message User Image">--}}
-                    {{--<!-- /.direct-chat-img -->--}}
-                    {{--<div class="direct-chat-text">--}}
-                    {{--Is this template really for free? That's unbelievable!--}}
-                    {{--</div>--}}
-                    <!-- /.direct-chat-text -->
                     </div>
                     <!-- /.direct-chat-msg -->
 
                     <!-- Message to the right -->
-                    <div class="direct-chat-msg right" id="messages">
-                    {{--<div class="direct-chat-info clearfix">--}}
-                    {{--<span class="direct-chat-name pull-right" id="user"></span>--}}
-                    {{--<span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>--}}
-                    {{--</div>--}}
-                    {{--<!-- /.direct-chat-info -->--}}
-                    {{--<img class="direct-chat-img" src="public/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->--}}
-                    {{--<div class="direct-chat-text">--}}
-
-                    {{--</div>--}}
-                    <!-- /.direct-chat-text -->
+                    <div class="direct-chat-msg right">
                     </div>
 
                     <!-- /.direct-chat-msg -->
@@ -989,13 +972,14 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-                <form action="" method="post">
+                <form id="chat_form" action="" method="post">
                     <div class="input-group">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" id="my_id" name="my_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="chat_id" id="user_recived" value="">
                         <input type="hidden" name="user_name" value="{{ Auth::user()->firstname }}">
-                        <input type="text" name="msg" placeholder="Type Message ..." class="form-control msg msg-box-chat">
+                        <input type="text" name="msg" placeholder="Type Message ..."
+                               class="form-control msg msg-box-chat">
                       <span class="input-group-btn">
 						  <input type="button" value="Send" class="btn btn-primary btn-flat send-msg">
                       </span>
@@ -1006,7 +990,8 @@
         </div>
     </div>
 </div>
-
+<input type="hidden" value="{{ url('/') }}" id="baseUrl">
+<input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" id="myID">
 <script type="text/javascript">
     //Open chat box
     $(document).on('click', '.list-group-item', function () {
@@ -1027,6 +1012,36 @@
         $clone.find('h3.box-title').text(text);
         $('#chat-popup').append($clone);
         $("#chat-popup").find("#user_recived").val(chatid);
+
+        var baseUrl = $("#baseUrl").val()+ "/message/list";
+        var myID = $("#myID").val();
+        $.ajax({
+            url: baseUrl,
+            type: 'GET',
+            dataType: 'json',
+            data: { 'id':chatid },
+            success: function (obj) {
+                console.log(obj);
+                $("#chat-popup").find(".direct-chat-messages").empty();
+                var messages = "";
+                $.each(obj.data.data,function(index,item){
+                    if(item.sender_id == myID) {
+                        messages += "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
+                                + "You" + "</span> </div>"
+                                + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
+                    }
+                    else
+                    {
+                        messages += "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
+                                + item.reciver_user_info.firstname + "</span> </div>"
+                                + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
+                    }
+                });
+                console.log(messages);
+
+                $("#chat-popup").find(".direct-chat-messages").append(messages);
+            }
+        })
     });
 
     //Remove chat box
@@ -1043,11 +1058,11 @@
         console.log(data);
         var chatid = $("#chat-popup").find("#user_recived").val();
         if (parseInt(data.user_id) == parseInt($("input[name='my_id']").val()) && parseInt(data.my_id) == parseInt(chatid)) {
-            var message = "<div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
+            var message = "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
                     + data.user_name + "</span> </div>"
-                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + data.message + "</div>";
+                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + data.message + "</div> </div>";
 
-            $("#chat-popup").find(".direct-chat-msg.right").append(message);
+            $("#chat-popup").find(".direct-chat-messages").append(message);
         }
     });
     $(document).on('click', ".send-msg", function (e) {
@@ -1057,7 +1072,7 @@
         var my_id = $($this).find("input[name='my_id']").val();
         var user_id = $($this).find("input[name='chat_id']").val();
         var user_name = $($this).find("input[name='user_name']").val();
-        var msg =  $(this).parent().prev().val();
+        var msg = $(this).parent().prev().val();
         if (msg != '') {
             $.ajax({
                 type: "POST",
@@ -1066,10 +1081,10 @@
                 data: {'_token': token, 'message': msg, 'user_name': user_name, 'user_id': user_id, 'my_id': my_id},
                 success: function (data) {
                     $(".msg").val('');
-                    var message = "<div style='clear: both;'></div><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
+                    var message = "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
                             + "You" + "</span> </div>"
-                            + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + msg + "</div>";
-                    $("#chat-popup").find(".direct-chat-msg.right").append(message);
+                            + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + msg + "</div> </div>";
+                    $("#chat-popup").find(".direct-chat-messages").append(message);
                 }
             });
         } else {

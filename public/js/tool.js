@@ -1,7 +1,7 @@
 $(document).on('ready', function () {
     common.run();
     comment.run();
-    editstatus.run();
+    showstatus.run();
 });
 
 var common = {
@@ -88,33 +88,31 @@ var search = {
     }
 }
 
-var editstatus = {
+var showstatus = {
     showeditStatus: function () {
         $(document).on('click', '.btn-edit-status', function (event) {
-            event.preventDefault();
+            // event.preventDefault();
             var statusbody = $(this).closest("#post_status").find("#body_status").text();
             var id_of_status = $(this).closest("#post_status").find("input[name='id_of_status']").val();
             console.log(id_of_status);
-            $("#area_edit_status").val(statusbody.trim());
-            $("#edit_status_id").val(id_of_status);
+            $("#area_edit_status").text(statusbody.trim());
+            $("#id_edit_status").val(id_of_status);
             $("#editModal").modal('show');
         });
-    },
-
-    edit_Status:function () {
-        $(document).on('submit', '#edit_status_form', function (event) {
-            event.preventDefault();
+        $(document).on('click', '#saveChangeStatus', function (e) {
+            // e.preventDefault();
             var status_body = $(this).closest(".modal-content").find("#area_edit_status").val();
-            var edit_status_id = $(this).closest(".modal-content").find("input[name='edit_status_id']").val();
+            var id_edit_status = $(this).closest(".modal-content").find("input[name='id_edit_status']").val();
             console.log(status_body);
             $.post('/larasocial-master/edit/article',
                 {
-                    "edit_status_id": edit_status_id,
+                    "id_edit_status": id_edit_status,
                     "area_edit_status": status_body
                 }, 'json'
-
             ).done(function (data) {
-                // $('#result').html(markup);
+                console.log(JSON.stringify(data));
+                // $("#post_status").find("#body_status").text(data.newbody);
+                $('#editModal').modal('hide');
             }).error(function (err) {
                 console.log(err);
             });
@@ -123,6 +121,5 @@ var editstatus = {
     ,
     run: function () {
         this.showeditStatus();
-        this.edit_Status();
     }
 }

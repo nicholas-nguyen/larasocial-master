@@ -16,10 +16,10 @@ class MessageController extends ApiController
 
     public function getList(Request $request){
         $message = \DB::table('messages')->select("messages.*")
-                ->where('messages.sender_id',$request->id)
-                ->orWhere('messages.reciver_id',$request->id)
+                ->where('messages.sender_id',$request->input('id'))
+                ->orWhere('messages.reciver_id',$request->input('id'))
                 ->orderBy('messages.created_at','ASC')
-                ->paginate($request->limit);
+                ->paginate(10);
 
         $messageParse = $this->parseMessage($message);
 

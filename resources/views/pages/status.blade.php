@@ -72,7 +72,7 @@
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="comment_id" value="{{ $comment->id }}"/>
                                     <a href="" type="submit" class="link-black text-sm like-comment-btn"><i
-                                                class="fa fa-thumbs-o-up margin-r-5"></i> Like</a><span
+                                                class="fa fa-thumbs-o-up margin-r-5"></i> Like </a><span
                                             class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }}
                                         )</span>
                                 </form>
@@ -91,9 +91,9 @@
 
 <div class="modal" id="editModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <form action="{{ url('/edit/article') }}" method="post" id="edit_status_form">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <form action="{{ url('/edit/article') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
@@ -101,14 +101,14 @@
                 </div>
                 <div class="modal-body">
                     <textarea id="area_edit_status" name="area_edit_status"></textarea>
-                    <input type="hidden" id="edit_status_id" name="edit_status_id" value="">
+                    <input type="hidden" id="id_edit_status" name="id_edit_status" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary saveChangeStatus">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="saveChangeStatus">Save changes</button>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
