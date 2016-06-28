@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -380,7 +379,7 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <!-- form start -->
-                                    <form class="form-horizontal" method="post" action="{{ url('/post/article') }}">
+                                    <form class="form-horizontal" method="post" action="{{ url('/post/article') }}" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="box-body">
                                             <textarea id="textareastatus" name="status"
@@ -940,7 +939,6 @@
         cursor:pointer;
     }
 
-
 </style>
 
 <div id="chat-popup" style="
@@ -968,7 +966,7 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages" >
+                <div id="chat-body" class="direct-chat-messages" style="width: 270px; height: -300px; overflow: auto;">
                     <!-- Message. Default to the left -->
                     <div class="direct-chat-msg left">
                     </div>
@@ -1007,6 +1005,7 @@
 <input type="hidden" value="{{ url('/') }}" id="baseUrl">
 <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" id="myID">
 <script type="text/javascript">
+
     //Open chat box
     $(document).on('click', '.list-group-item', function () {
         var $temp_pop = $('#temp');
@@ -1104,6 +1103,8 @@
             alert("Please Add Message!");
         }
     })
+
+
 </script>
 </body>
 </html>

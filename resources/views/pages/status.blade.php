@@ -17,8 +17,11 @@
         {{ $status->body }}
         <input type="hidden" id="id_of_status" name="id_of_status" value="{{ $status->id }}">
     </span>
-
-    <ul class="list-inline">
+    <div style="clear: both"></div>
+    @if($status->image_url != null)
+        <img src="{{URL::asset($status->image_url)}}" alt="profile Pic" height="200" width="200">
+    @endif
+    <ul class="list-inline" style="padding-top: 10px;">
         <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
         <li>
             <form method="POST" id="likeform" action="">

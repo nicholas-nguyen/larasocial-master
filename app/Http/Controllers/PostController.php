@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use LRedis;
 use App\LikeComment;
 use Illuminate\Support\Facades\Response;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Hash;
+use File;
 use Validator;
 use App\Users;
 use App\Like;
@@ -31,13 +33,34 @@ class PostController extends Controller
         return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends);
     }
 
-    public function postArticle()
+    public function postArticle(Request $request)
     {
-        if(Input::hasFile('photo')){
+        if(Input::hasFile('images_upload')){
+                $text = e(Input::get('status'));
+                if ($text != null) {
+                    $status = new Status();
+                    $status->body = $text;
+                    $status->user_id = Auth::user()->id;
+                    $file = Input::file('images_upload');
+                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.jpg';
+                    $status->image_url = "public/images/".$filename;
+                    $status->save();
+                    Input::file('images_upload')->move("public/images", $filename);
+                    return redirect()->back();
+                } else {
+                    $status = new Status();
+                    $status->user_id = Auth::user()->id;
+                    $file = Input::file('images_upload');
+                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.jpg';
+                    $status->image_url = "public/images/".$filename;
+                    $status->save();
+                    Input::file('images_upload')->move("public/images", $filename);
+//                    Storage::disk('local')->put($filename,File::get($file));
+                    return redirect()->back();
+                }
 
         }
         else {
-            If (Input::has('status')) {
                 $text = e(Input::get('status'));
                 if ($text != null) {
                     $status = new Status();
@@ -49,7 +72,7 @@ class PostController extends Controller
                 } else {
                     return redirect()->back();
                 }
-            }
+
         }
         return redirect()->back();
 //        if(Input::hasFile('images')){
