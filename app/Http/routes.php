@@ -61,6 +61,11 @@ Route::post('/edit/user',[
     'as'     => '/edit/user',
     'middleware' => ['auth'],
 ]);
+Route::post('/change/avatar',[
+    'uses'   => 'ProfileController@postAvatar',
+    'as'     => '/change/avatar',
+    'middleware' => ['auth'],
+]);
 Route::get('/friends/{id}',[
     'uses'   => 'FriendController@getIndex',
     'as'     => 'friends.index',

@@ -1,6 +1,11 @@
 <div class="post" id="post_status">
     <div class="user-block">
-        <img class="img-circle img-bordered-sm" src="public/img/user1-128x128.jpg" alt="user image">
+        @if($user->avatar_url != null)
+            <img class="img-circle img-md" src="{{ URL::asset($user->avatar_url) }}" alt="User Image">
+        @else
+            <img class="img-circle img-md" src="{{ $user->getAvatarUrl() }}" alt="User Image">
+        @endif
+
         <div class="username">
             <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
             @if(Auth::user()->id == $status->user->id)
@@ -19,17 +24,22 @@
     </span>
     <div style="clear: both"></div>
     @if($status->image_url != null)
-        <img src="{{URL::asset($status->image_url)}}" alt="profile Pic" height="200" width="200">
+        <div style="text-align:center;">
+            <img style="display: block;margin: auto;max-width: 100%;max-height: 100%;padding-top: 10px;" src="{{URL::asset($status->image_url)}}" alt="Your Picture">
+        </div>
     @endif
     <ul class="list-inline" style="padding-top: 10px;">
-        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>
+        {{--<li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> Share</a></li>--}}
         <li>
             <form method="POST" id="likeform" action="">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status_id" value="{{ $status->id }}"/>
-                <a href="" type="submit" class="link-black text-sm like-btn"><i
-                            class="fa fa-thumbs-o-up margin-r-5"></i> Like </a><span
-                        class="count count-{{ $status->id }}">({{ $status->likes->count() }})</span>
+                @if($status->likes()->where('user_id', Auth::user()->id)->count() == 0)
+                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-up margin-r-5"></i>Like </a>
+                @else
+                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-down margin-r-5"></i>Dislike </a>
+                @endif
+                    <span class="count count-{{ $status->id }}">({{ $status->likes->count() }})</span>
             </form>
 
         </li>
@@ -46,7 +56,7 @@
         {!! Form::hidden('status_comment',$status->id) !!}
         {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
         <div class="input-group list-inline">
-            <input class="form-control" type="text" placeholder="Type a comment" id="" name="comments">
+            <input class="form-control" type="text" placeholder="Type a comment" id="comments" name="comments">
                       <span class="input-group-btn">
                           <button class="btn btn-block btn-default btn-flat" type="submit"><i
                                       class="fa fa-paper-plane-o"></i></button>
@@ -61,8 +71,15 @@
                     <div class="box-footer box-comments">
                         <div class="box-comment">
                             <!-- User image -->
-                            <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-
+                            @if(\App\Users::find($comment->user_id)->avatar_url != null)
+                                <img class="img-circle img-md"
+                                     src="{{URL::asset(\App\Users::find($comment->user_id)->avatar_url)}}"
+                                     alt="User Image">
+                            @else
+                                <img class="img-circle img-md"
+                                     src="{{URL::asset(\App\Users::find($comment->user_id)->getAvatarUrl() )}}"
+                                     alt="User Image">
+                            @endif
                             <div class="comment-text">
                               <span class="username">
                                 <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ \App\Users::find($comment->user_id)->firstname }} {{ \App\Users::find($comment->user_id)->lastname }}</a>
@@ -74,10 +91,13 @@
                                 <form method="POST" id="likecommentform" action="">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="comment_id" value="{{ $comment->id }}"/>
-                                    <a href="" type="submit" class="link-black text-sm like-comment-btn"><i
-                                                class="fa fa-thumbs-o-up margin-r-5"></i> Like </a><span
-                                            class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }}
-                                        )</span>
+                                    @if($comment->likes()->where('user_id', Auth::user()->id)->count() == 0)
+                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit" class="link-black text-sm like-comment-btn"><i class="fa fa-thumbs-o-up margin-r-5"></i>Like </a>
+                                    @else
+                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-down margin-r-5"></i>Dislike </a>
+                                    @endif
+                                    <span class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }})
+                                    </span>
                                 </form>
                             </div>
                             <!-- /.comment-text -->

@@ -17,8 +17,8 @@ class MessageController extends ApiController
     public function getList(Request $request){
         $message = \DB::table('messages')->select("messages.*")
                 ->where('messages.sender_id',Auth::user()->id)
-                ->Where('messages.reciver_id',$request->input('id'))
-                ->orwhere('messages.sender_id',$request->input('id'))
+                ->Where('messages.reciver_id',$request['id'])
+                ->orwhere('messages.sender_id',$request['id'])
                 ->Where('messages.reciver_id',Auth::user()->id)
                 ->orderBy('messages.created_at','ASC')
                 ->paginate(10);
@@ -28,11 +28,11 @@ class MessageController extends ApiController
         return $this->respondSuccess('success',$messageParse,200);
     }
 
-    public function parseMessage(&$message){
+    public function parseMessage($message){
         if(count($message)>0 ){
             foreach ($message as $key => $item){
-                $message[$key]->sender_user_info = \App\Users::find($item->sender_id)->first();
-                $message[$key]->reciver_user_info = \App\Users::find($item->reciver_id)->first();
+                $message[$key]->sender_user_info = \App\Users::where('id',$item->sender_id)->first();
+                $message[$key]->reciver_user_info = \App\Users::where('id',$item->reciver_id)->first();
             }
             return $message;
         }

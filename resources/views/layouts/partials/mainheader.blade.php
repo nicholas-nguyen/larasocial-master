@@ -34,7 +34,11 @@
                                     <a href="#">
                                         <div class="pull-left">
                                             <!-- User Image -->
-                                            <img src="public/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                            @if(Auth::user()->avatar_url != null)
+                                                <img class="img-circle" src="{{URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
+                                            @else
+                                                <img class="img-circle" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                                            @endif
                                         </div>
                                         <!-- Message title and timestamp -->
                                         <h4>
@@ -117,26 +121,35 @@
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{asset('public/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
+                            @if(Auth::user()->avatar_url != null)
+                                <img class="img-circle img-sm" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
+                            @else
+                                <img class="img-circle img-sm" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image">
+                            @endif
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{asset('public/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                                @if(Auth::user()->avatar_url != null)
+                                    <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
+                                @else
+                                    <img class="img-circle" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image">
+                                @endif
                                 <p>
-                                    {{ Auth::user()->firstname }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
+                                    {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
+                                    <small>Member since {{ Auth::user()->created_at }}</small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>
+                                    <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change Avatar</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.sales') }}</a>
+                                    <a href="#" data-toggle="modal" data-target="#changepassModal">Change
+                                        password</a>
                                 </div>
                                 <div class="col-xs-4 text-center">
                                     <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
@@ -163,3 +176,88 @@
         </div>
     </nav>
 </header>
+
+<div class="modal" id="changepassModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Password</h4>
+            </div>
+            <form action="{{ url('/change-password') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Current password:</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password">
+                        @if ($errors->has('current_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('current_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">New Password:</label>
+                        <input type="password" class="form-control" id="new_password" name="new_password">
+                        @if ($errors->has('new_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('new_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Retype Password:</label>
+                        <input type="password" class="form-control" id="retype_password" name="retype_password">
+                        @if ($errors->has('retype_password'))
+                            <span class="help-block">
+	                        <strong style="color: red">{{ $errors->first('retype_password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- ./wrapper -->
+<div class="modal" id="changeavatarModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Avatar</h4>
+            </div>
+            <form action="{{ url('/change/avatar') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-body">
+                    <div class="form-group" style="text-align: center;">
+                        @if(Auth::user()->avatar_url != null)
+                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                        @else
+                            <img class="text-center" src="{{ Auth::user()->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                        @endif
+                        {{--<img style="text-align: center;" id="img_avatar" src="" alt="Your Avatar"/>--}}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <label class="btn btn-success">
+                        Picture
+                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar" style="display: none;" onchange="readUrlAvatar(this);">
+                    </label>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

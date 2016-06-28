@@ -8,16 +8,27 @@
             <hr>
             @foreach($result as $u)
                 <div class="media">
-                    <img class="img-circle img-sm" src="public/img/user3-128x128.jpg"
-                         alt="User Image">
-                    <div class="media-body">
+                    <div class="list-inline">
+                        <div class="col-xs-12 col-md-1 text-right">
+                        @if($u->avatar_url != null)
+                            <img class="img-circle img-md" src="{{URL::asset($u->avatar_url) }}" alt="User Image">
+                        @else
+                            <img class="img-circle img-md" src="{{ $u->getAvatarUrl() }}" alt="User Image">
+                        @endif
+                        </div>
+                        <div class="col-xs-12 col-md-11 text-left">
                         <a href="{{ route('profile.index',['id' => $u->id])}}">
-                        <span class="username">
-                            <strong>{{ $u->firstname }} {{ $u->lastname }}</strong>
-                        </span>
+                                <span class="username">
+                                    <h5><strong>{{ $u->firstname }} {{ $u->lastname }}</strong></h5>
+                                </span>
                         </a>
+                        @if($u->currentcity)
+                            <span> - {{ $u->currentcity }}</span>
+                        @endif
+                            </div>
                     </div>
                 </div>
+                <div style="clear:both;"></div>
             @endforeach
         </div>
     </div>

@@ -17,8 +17,11 @@
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="../public/img/user4-128x128.jpg"
-                             alt="User profile picture">
+                        @if($user->avatar_url != null)
+                            <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($user->avatar_url) }}" alt="User Image" style="width: 128px;height: 128px;">
+                        @else
+                            <img class="profile-user-img img-responsive img-circle" src="{{ $user->getAvatarUrl() }}" alt="User Image" style="width: 128px;height: 128px;">
+                        @endif
 
                         <h3 class="profile-username text-center"
                             style="color: #3c8dbc;">{{ $user->firstname }} {{ $user->lastname }}</h3>
@@ -36,7 +39,9 @@
                                 <b>Friends</b> <a class="pull-right">{{ $user->friends()->count() }}</a>
                             </li>
                         </ul>
-                        @if(empty(App\Users::checkFriendStatus(Auth::user()->id,$user->id)) && empty(App\Users::checkFriendStatus($user->id,Auth::user()->id)))
+                        @if(Auth::user()->id === $user->id)
+                            <a class="btn btn-info btn-block"><b>Your Profile</b></a>
+                        @elseif(empty(App\Users::checkFriendStatus(Auth::user()->id,$user->id)) && empty(App\Users::checkFriendStatus($user->id,Auth::user()->id)))
                             <a href="{{ route('friends.add', ['id' => $user->id]) }}" class="btn btn-primary btn-block"><b>Add friend</b></a>
                         @elseif(App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 1)
                             <a class="btn btn-info btn-block"><b>Waitting accept</b></a>
@@ -46,11 +51,8 @@
                             App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 2 ||
                             App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 4
                         )
-                            {{--<form  action="{{ route('friends.delete', ['id' => $user->id]) }}" method="POST">--}}
-                                {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-                                {{--<input type="submit" value="Unfriend" class="btn btn-danger btn-block">--}}
-                            {{--</form>--}}
                             <a href="{{ route('friends.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-block"><b>Unfriend</b></a>
+
                         @else
                         @endif
                     </div>
@@ -133,6 +135,7 @@
                                ])
                             !!}
                         @endforeach
+                            {{ $status_user->render() }}
                             <!-- /.post -->
                         </div>
                         <!-- /.tab-pane -->

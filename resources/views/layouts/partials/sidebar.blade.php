@@ -19,12 +19,15 @@
         {{--@endif--}}
 
         <!-- search form (Optional) -->
-        <form action="#" method="get" class="sidebar-form">
+        <form action="{{ url('search') }}" method="post" class="sidebar-form">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="{{ trans('adminlte_lang::message.search') }}..."/>
-              <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
-              </span>
+                <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search...">
+                      <span class="input-group-btn">
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search"><i
+                                    class="fa fa-search"></i>
+                        </button>
+                      </span>
             </div>
         </form>
         <!-- /.search form -->

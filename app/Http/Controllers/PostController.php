@@ -41,8 +41,8 @@ class PostController extends Controller
                     $status = new Status();
                     $status->body = $text;
                     $status->user_id = Auth::user()->id;
-                    $file = Input::file('images_upload');
-                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.jpg';
+                    $extension = Input::file('images_upload')->getClientOriginalExtension();
+                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.'.$extension;
                     $status->image_url = "public/images/".$filename;
                     $status->save();
                     Input::file('images_upload')->move("public/images", $filename);
@@ -50,8 +50,8 @@ class PostController extends Controller
                 } else {
                     $status = new Status();
                     $status->user_id = Auth::user()->id;
-                    $file = Input::file('images_upload');
-                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.jpg';
+                    $extension = Input::file('images_upload')->getClientOriginalExtension();
+                    $filename = rand(11111,99999).'_'.rand(11111,99999).'.'.$extension;
                     $status->image_url = "public/images/".$filename;
                     $status->save();
                     Input::file('images_upload')->move("public/images", $filename);
@@ -96,7 +96,7 @@ class PostController extends Controller
                 $comm->status_id = $stacomment;
                 $comm->save();
 
-                return redirect('dashboard');
+                return redirect()->back();
             } else {
                 return redirect()->back();
             }
@@ -106,6 +106,9 @@ class PostController extends Controller
 
     public function deleteArticle($id){
         $delArticle = Status::where('id',$id)->first();
+        $images = $delArticle->image_url;
+        File::delete($images);
+
         $delArticle -> delete();
 
         return redirect()->back();

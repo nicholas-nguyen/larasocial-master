@@ -11,11 +11,21 @@ var common = {
         var socket = io.connect('http://localhost:8890');
         socket.on('like', function (data) {
             data = jQuery.parseJSON(data);
-
-            console.log(data.status_id);
-            $(".count-" + data.status_id).text(
-                '(' + data.like + ')'
-            );
+            if(data.like == 0) {
+                $("#a_like_" + data.status_id).html("<i class='fa fa-thumbs-o-up margin-r-5'></i>Like ");
+                // console.log(data.status_id);
+                $(".count-" + data.status_id).text(
+                    '(' + data.like + ')'
+                );
+            }
+            else
+            {
+                $("#a_like_" + data.status_id).html("<i class='fa fa-thumbs-o-down margin-r-5'></i>Dislike ");
+                // console.log(data.status_id);
+                $(".count-" + data.status_id).text(
+                    '(' + data.like + ')'
+                );
+            }
         });
 
         $(document).on("click", ".like-btn", function (e) {
@@ -29,6 +39,7 @@ var common = {
             ).done(function (data) {
                 // $('.count-'+staid).text('('+data.count_like+')');
                 // $('.count-' + staid).val('');
+
             }).error(function (err) {
                 console.log(err);
             });
@@ -44,10 +55,23 @@ var comment = {
         var socket = io.connect('http://localhost:8890');
         socket.on('likecm', function (data) {
             data = jQuery.parseJSON(data);
-            console.log(data.comment_id);
-            $(".count-comment-" + data.comment_id).text(
-                '(' + data.likecm + ')'
-            );
+            // console.log(data.comment_id);
+
+            if(data.likecm == 0) {
+                $("#a_like_cm_" + data.comment_id).html("<i class='fa fa-thumbs-o-up margin-r-5'></i>Like ");
+                // console.log(data.status_id);
+                $(".count-comment-" + data.comment_id).text(
+                    '(' + data.likecm + ')'
+                );
+            }
+            else
+            {
+                $("#a_like_cm_" + data.comment_id).html("<i class='fa fa-thumbs-o-down margin-r-5'></i>Dislike ");
+                // console.log(data.status_id);
+                $(".count-comment-" + data.comment_id).text(
+                    '(' + data.likecm + ')'
+                );
+            }
         });
         $(document).on('click', ".like-comment-btn", function (e) {
             e.preventDefault();

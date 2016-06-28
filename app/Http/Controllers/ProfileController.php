@@ -16,7 +16,7 @@ class ProfileController extends Controller
         if(!$user){
             abort(404);
         }
-        $status_user = Status::where('user_id',$id)->orderBy('created_at', 'desc')->get();
+        $status_user = Status::where('user_id',$id)->orderBy('created_at', 'desc')->simplePaginate(10);;
         return view('users.profile-user')->with('user',$user)->with('status_user',$status_user);
     }
 
@@ -36,7 +36,22 @@ class ProfileController extends Controller
         return redirect()->back();
     }
 
-    public function postEdit(){
-
+    public function postAvatar(){
+        if(Input::hasFile('images_avatar')){
+                $user = Users::find(Auth::user()->id);
+                $extension = Input::file('images_avatar')->getClientOriginalExtension();
+                $filename = 'avatarUsers'.'-'.Auth::user()->id.'.'.$extension;
+                $user->avatar_url = "public/images/avatar/".$filename;
+                $user->save();
+                Input::file('images_avatar')->move("public/images/avatar/", $filename);
+//                    Storage::disk('local')->put($filename,File::get($file));
+            \Session::flash('messages',"Avatar have been changed");
+                return redirect()->back();
+        }
+        else {
+            \Session::flash('messages',"Avatar haven't been changed");
+            return redirect()->back();
+        }
+        return redirect()->back();
     }
 }

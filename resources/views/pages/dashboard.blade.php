@@ -8,9 +8,9 @@
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="public/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="public/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -264,14 +264,21 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="public/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                            @if(Auth::user()->avatar_url != null)
+                                <img class="img-circle img-sm" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
+                            @else
+                                <img class="img-circle img-sm" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                            @endif
                             <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="public/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-
+                                @if(Auth::user()->avatar_url != null)
+                                    <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
+                                @else
+                                    <img class="img-circle" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image">
+                                @endif
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
                                     <small>Member since {{ Auth::user()->created_at }}</small>
@@ -281,7 +288,7 @@
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
+                                        <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change Avatar</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#" data-toggle="modal" data-target="#changepassModal">Change
@@ -390,7 +397,7 @@
                                         <div class="box-footer">
                                             <label class="btn btn-success">
                                                 Picture
-                                                <input type="file" name="images_upload" style="display: none;" onchange="readURL(this);">
+                                                <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_upload" style="display: none;" onchange="readURL(this);">
                                             </label>
                                             <button type="submit" class="btn btn-info pull-right">Post</button>
                                         </div>
@@ -511,84 +518,6 @@
                                 </ul>
                             </div>
                             <!-- /.tab-pane -->
-
-                            {{--<div class="tab-pane" id="settings">--}}
-                            {{--<form class="form-horizontal">--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" class="form-control" id="inputFirstname"--}}
-                            {{--placeholder="Firsname">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputLastname" class="col-sm-2 control-label">Lastname</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" class="form-control" id="inputLastname"--}}
-                            {{--placeholder="Lastname">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="date" class="form-control" id="inputBirthday"--}}
-                            {{--placeholder="Birthday">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputGender" class="col-sm-2 control-label">Gender</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<select class="form-control" id="inputGender">--}}
-                            {{--<option value="Male">Male</option>--}}
-                            {{--<option value="Female">Female</option>--}}
-                            {{--</select>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputHometown" class="col-sm-2 control-label">Hometown</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" class="form-control" id="inputHometown"--}}
-                            {{--placeholder="Hometown">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" class="form-control" id="inputCurentcity"--}}
-                            {{--placeholder="Curent city">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<label for="inputSkills" class="col-sm-2 control-label">Skills</label>--}}
-
-                            {{--<div class="col-sm-10">--}}
-                            {{--<input type="text" class="form-control" id="inputSkills"--}}
-                            {{--placeholder="Skills">--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                            {{--<div class="checkbox">--}}
-                            {{--<label>--}}
-                            {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
-                            {{--conditions</a>--}}
-                            {{--</label>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                            {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                            {{--<button type="submit" class="btn btn-danger">Submit</button>--}}
-                            {{--</div>--}}
-                            {{--</div>--}}
-                            {{--</form>--}}
-                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -600,7 +529,7 @@
 
                     <div class="box box-default collapsed-box box-solid">
                         <div class="box-header with-border">
-                            <h3 class="box-title">FRIENDS CHAT</h3>
+                            <h3 class="box-title">FRIENDS & CHAT</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
@@ -614,10 +543,13 @@
                             @foreach($friends as $friend)
                                 <div class="list-group-item">
                                     <a>
-                                        <img class="img-circle img-sm" src="public/img/user3-128x128.jpg"
-                                             alt="User Image">
+                                        @if($friend->avatar_url != null)
+                                            <img class="img-circle img-sm" src="{{ URL::asset($friend->avatar_url) }}" alt="User Image">
+                                        @else
+                                            <img class="img-circle img-sm" src="{{ $friend->getAvatarUrl() }}" alt="User Image">
+                                        @endif
                                         <span class="username">
-                                        {{ $friend->firstname }} {{ $friend->lastname }}
+                                            <strong>&nbsp;{{ $friend->firstname }} {{ $friend->lastname }}</strong>
                                         </span>
                                         <input type="hidden" id="friend_id" value="{{ $friend->id }}">
                                     </a>
@@ -638,11 +570,10 @@
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <div class="pull-right hidden-xs">
-            <b>Version</b> 2.3.3
-        </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-        reserved.
+        {{--<div class="pull-right hidden-xs">--}}
+            {{--<b>Version</b> 2.3.3--}}
+        {{--</div>--}}
+        <strong>Copyright &copy; 2015-2016</strong>
     </footer>
 
     <!-- Control Sidebar -->
@@ -890,7 +821,39 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- ./wrapper -->
-
+<div class="modal" id="changeavatarModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Change Avatar</h4>
+            </div>
+            <form action="{{ url('/change/avatar') }}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-body">
+                    <div class="form-group" style="text-align: center;">
+                        @if(Auth::user()->avatar_url != null)
+                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar" alt="User Image" style="width: 160px;height: 160px;">
+                        @else
+                            <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                        @endif
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <label class="btn btn-success">
+                        Picture
+                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar" style="display: none;" onchange="readUrlAvatar(this);">
+                    </label>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
 <!-- jQuery 2.2.0 -->
 
 <!-- Bootstrap 3.3.6 -->
@@ -913,6 +876,20 @@
 
             reader.onload = function (e) {
                 $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function readUrlAvatar(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_avatar')
                         .attr('src', e.target.result)
                         .width(150)
                         .height(200);
@@ -990,8 +967,8 @@
                         <input type="hidden" id="my_id" name="my_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="chat_id" id="user_recived" value="">
                         <input type="hidden" name="user_name" value="{{ Auth::user()->firstname }}">
-                        <input type="text" name="msg" placeholder="Type Message ..."
-                               class="form-control msg msg-box-chat">
+                        {{--<input type="text" name="msg" placeholder="Type Message ..." class="form-control msg msg-box-chat">--}}
+                        <input type="text" name="msg" placeholder="Write message ..." class="form-control msg">
                       <span class="input-group-btn">
 						  <input type="button" value="Send" class="btn btn-primary btn-flat send-msg">
                       </span>
@@ -1032,7 +1009,7 @@
             url: baseUrl,
             type: 'GET',
             dataType: 'json',
-            data: { 'id':chatid },
+            data: { 'id':$(this).closest(".list-group-item").find('#friend_id').val() },
             success: function (obj) {
                 console.log(obj);
                 $("#chat-popup").find(".direct-chat-messages").empty();
@@ -1041,13 +1018,17 @@
                     if(item.sender_id == myID) {
                         messages += "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
                                 + "You" + "</span> </div>"
-                                + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
+                                +"<img class='direct-chat-img' src='"
+                                + item.sender_user_info.avatar_url + "' alt='Message User Image'>"
+                                +"<div class='direct-chat-text'>" + item.message + "</div> </div>";
                     }
                     else
                     {
                         messages += "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
-                                + item.reciver_user_info.firstname + "</span> </div>"
-                                + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
+                                + item.sender_user_info.firstname + "</span> </div>"
+                                + "<img class='direct-chat-img' src='"
+                                + item.sender_user_info.avatar_url
+                                + "' alt='Message User Image'><div class='direct-chat-text'>" + item.message + "</div> </div>";
                     }
                 });
 
@@ -1072,7 +1053,8 @@
         if (parseInt(data.user_id) == parseInt($("input[name='my_id']").val()) && parseInt(data.my_id) == parseInt(chatid)) {
             var message = "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
                     + data.user_name + "</span> </div>"
-                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + data.message + "</div> </div>";
+                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'>"
+                    + "<div class='direct-chat-text'>" + data.message + "</div> </div>";
 
             $("#chat-popup").find(".direct-chat-messages").append(message);
         }
@@ -1093,10 +1075,13 @@
                 data: {'_token': token, 'message': msg, 'user_name': user_name, 'user_id': user_id, 'my_id': my_id},
                 success: function (data) {
                     $(".msg").val('');
+
                     var message = "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
                             + "You" + "</span> </div>"
-                            + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'><div class='direct-chat-text'>" + msg + "</div> </div>";
-                    $("#chat-popup").find(".direct-chat-messages").append(message);
+                            + "<img class='direct-chat-img' src='"
+                            + "' alt='Message User Image'>"
+                            + "<div class='direct-chat-text'>" + msg + "</div> </div>";
+                    $("#chat-popup").find(".direct-chat-messages").html(message);
                 }
             });
         } else {
