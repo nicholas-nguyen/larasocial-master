@@ -127,7 +127,7 @@
                                 <img class="img-circle img-sm" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image">
                             @endif
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
+                            <span class="hidden-xs">&nbsp;&nbsp;{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
@@ -135,7 +135,7 @@
                                 @if(Auth::user()->avatar_url != null)
                                     <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
                                 @else
-                                    <img class="img-circle" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image">
+                                    <img class="img-circle" src="{{ Auth::user()->id->getAvatarUrl() }}" alt="User Image">
                                 @endif
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}

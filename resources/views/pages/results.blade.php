@@ -19,11 +19,13 @@
                         <div class="col-xs-12 col-md-11 text-left">
                         <a href="{{ route('profile.index',['id' => $u->id])}}">
                                 <span class="username">
-                                    <h5><strong>{{ $u->firstname }} {{ $u->lastname }}</strong></h5>
+                                    <h4><strong>{{ $u->firstname }} {{ $u->lastname }}</strong></h4>
                                 </span>
                         </a>
                         @if($u->currentcity)
                             <span> - {{ $u->currentcity }}</span>
+                            @else
+                            <span> - unknown</span>
                         @endif
                             </div>
                     </div>
