@@ -37,7 +37,7 @@
                                             @if(Auth::user()->avatar_url != null)
                                                 <img class="img-circle" src="{{URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
                                             @else
-                                                <img class="img-circle" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                                                <img class="img-circle" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
                                             @endif
                                         </div>
                                         <!-- Message title and timestamp -->
@@ -124,7 +124,7 @@
                             @if(Auth::user()->avatar_url != null)
                                 <img class="img-circle img-sm" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
                             @else
-                                <img class="img-circle img-sm" src="{{ Auth::user()->getAvatarUrl() }}" alt="User Image">
+                                <img class="img-circle img-sm" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" alt="User Image">
                             @endif
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs">&nbsp;&nbsp;{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
@@ -135,7 +135,7 @@
                                 @if(Auth::user()->avatar_url != null)
                                     <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
                                 @else
-                                    <img class="img-circle" src="{{ Auth::user()->id->getAvatarUrl() }}" alt="User Image">
+                                    <img class="img-circle" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" alt="User Image">
                                 @endif
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
@@ -242,7 +242,7 @@
                         @if(Auth::user()->avatar_url != null)
                             <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @else
-                            <img class="text-center" src="{{ Auth::user()->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                            <img class="text-center" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @endif
                         {{--<img style="text-align: center;" id="img_avatar" src="" alt="Your Avatar"/>--}}
                     </div>

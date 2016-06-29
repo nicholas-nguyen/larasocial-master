@@ -30,10 +30,10 @@
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Followers</b> <a class="pull-right">1,322</a>
+                                <b>Birthday</b> <a class="pull-right">{{ $user->birthday }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Following</b> <a class="pull-right">543</a>
+                                <b>Gender</b> <a class="pull-right">{{ $user->gender }}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Friends</b> <a class="pull-right">{{ $user->friends()->count() }}</a>
