@@ -139,135 +139,130 @@
                     <!-- Notifications: style can be found in dropdown.less -->
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-bell-o"></i>
-                            <span class="label label-warning">10</span>
+                            <i class="fa  fa-users"></i>
+                            @if($request->count() != 0)
+                                <span class="label label-warning">{{  $request->count() }}</span>
+                            @else
+                                <span class="label label-warning"></span>
+                            @endif
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have 10 notifications</li>
+                            <li class="header">You have {{ $request->count() }} friend request</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-warning text-yellow"></i> Very long description here that
-                                            may not fit into the
-                                            page and may cause design problems
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-users text-red"></i> 5 new members joined
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-user text-red"></i> You changed your username
-                                        </a>
-                                    </li>
+                                    @foreach($request as $r)
+                                        <li>
+                                            <a href="{{ route('profile.index',['id' => $r->id])}}">
+                                                @if($r->avatar_url != null)
+                                                    <img class="img-circle img-sm"
+                                                         src="{{ URL::asset($r->avatar_url) }}" alt="User Image"
+                                                         style="width: 160px;height: 160px;">
+                                                @else
+                                                    <img class="img-circle img-sm" src="{{ $r->getAvatarUrl() }}"
+                                                         alt="User Image" style="width: 160px;height: 160px;">
+                                                @endif
+                                                <span class="hidden-xs">{{ $r->firstname }} {{ $r->lastname }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="footer"><a href="#">View all</a></li>
                         </ul>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
-                    <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-flag-o"></i>
-                            <span class="label label-danger">9</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li class="header">You have 9 tasks</li>
-                            <li>
-                                <!-- inner menu: contains the actual data -->
-                                <ul class="menu">
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Design some buttons
-                                                <small class="pull-right">20%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-aqua" style="width: 20%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <span class="sr-only">20% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Create a nice theme
-                                                <small class="pull-right">40%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-green" style="width: 40%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <span class="sr-only">40% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Some task I need to do
-                                                <small class="pull-right">60%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-red" style="width: 60%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <span class="sr-only">60% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                    <li><!-- Task item -->
-                                        <a href="#">
-                                            <h3>
-                                                Make beautiful transitions
-                                                <small class="pull-right">80%</small>
-                                            </h3>
-                                            <div class="progress xs">
-                                                <div class="progress-bar progress-bar-yellow" style="width: 80%"
-                                                     role="progressbar" aria-valuenow="20" aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <span class="sr-only">80% Complete</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <!-- end task item -->
-                                </ul>
-                            </li>
-                            <li class="footer">
-                                <a href="#">View all tasks</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- User Account: style can be found in dropdown.less -->
+                {{--<li class="dropdown tasks-menu">--}}
+                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                {{--<i class="fa fa-flag-o"></i>--}}
+                {{--<span class="label label-danger">9</span>--}}
+                {{--</a>--}}
+                {{--<ul class="dropdown-menu">--}}
+                {{--<li class="header">You have 9 tasks</li>--}}
+                {{--<li>--}}
+                {{--<!-- inner menu: contains the actual data -->--}}
+                {{--<ul class="menu">--}}
+                {{--<li><!-- Task item -->--}}
+                {{--<a href="#">--}}
+                {{--<h3>--}}
+                {{--Design some buttons--}}
+                {{--<small class="pull-right">20%</small>--}}
+                {{--</h3>--}}
+                {{--<div class="progress xs">--}}
+                {{--<div class="progress-bar progress-bar-aqua" style="width: 20%"--}}
+                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
+                {{--aria-valuemax="100">--}}
+                {{--<span class="sr-only">20% Complete</span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<!-- end task item -->--}}
+                {{--<li><!-- Task item -->--}}
+                {{--<a href="#">--}}
+                {{--<h3>--}}
+                {{--Create a nice theme--}}
+                {{--<small class="pull-right">40%</small>--}}
+                {{--</h3>--}}
+                {{--<div class="progress xs">--}}
+                {{--<div class="progress-bar progress-bar-green" style="width: 40%"--}}
+                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
+                {{--aria-valuemax="100">--}}
+                {{--<span class="sr-only">40% Complete</span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<!-- end task item -->--}}
+                {{--<li><!-- Task item -->--}}
+                {{--<a href="#">--}}
+                {{--<h3>--}}
+                {{--Some task I need to do--}}
+                {{--<small class="pull-right">60%</small>--}}
+                {{--</h3>--}}
+                {{--<div class="progress xs">--}}
+                {{--<div class="progress-bar progress-bar-red" style="width: 60%"--}}
+                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
+                {{--aria-valuemax="100">--}}
+                {{--<span class="sr-only">60% Complete</span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<!-- end task item -->--}}
+                {{--<li><!-- Task item -->--}}
+                {{--<a href="#">--}}
+                {{--<h3>--}}
+                {{--Make beautiful transitions--}}
+                {{--<small class="pull-right">80%</small>--}}
+                {{--</h3>--}}
+                {{--<div class="progress xs">--}}
+                {{--<div class="progress-bar progress-bar-yellow" style="width: 80%"--}}
+                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
+                {{--aria-valuemax="100">--}}
+                {{--<span class="sr-only">80% Complete</span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--<!-- end task item -->--}}
+                {{--</ul>--}}
+                {{--</li>--}}
+                {{--<li class="footer">--}}
+                {{--<a href="#">View all tasks</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
+                {{--</li>--}}
+                <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             @if(Auth::user()->avatar_url != null)
-                                <img class="img-circle img-sm" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
+                                <img class="img-circle img-sm" src="{{ URL::asset(Auth::user()->avatar_url) }}"
+                                     alt="User Image" style="width: 160px;height: 160px;">
                             @else
-                                <img class="img-circle img-sm" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                                <img class="img-circle img-sm"
+                                     src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image"
+                                     style="width: 160px;height: 160px;">
                             @endif
                             <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
@@ -275,9 +270,12 @@
                             <!-- User image -->
                             <li class="user-header">
                                 @if(Auth::user()->avatar_url != null)
-                                    <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}" alt="User Image">
+                                    <img class="img-circle" src="{{ URL::asset(Auth::user()->avatar_url) }}"
+                                         alt="User Image">
                                 @else
-                                    <img class="img-circle" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image">
+                                    <img class="img-circle"
+                                         src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
+                                         alt="User Image">
                                 @endif
                                 <p>
                                     {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}
@@ -288,14 +286,15 @@
                             <li class="user-body">
                                 <div class="row">
                                     <div class="col-xs-4 text-center">
-                                        <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change Avatar</a>
+                                        <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change
+                                            Avatar</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
                                         <a href="#" data-toggle="modal" data-target="#changepassModal">Change
                                             password</a>
                                     </div>
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
+                                        <a href="#" data-toggle="modal" data-target="#friendRequestModal">Friends</a>
                                     </div>
                                 </div>
                                 <!-- /.row -->
@@ -359,7 +358,9 @@
 
                 <div class="col-md-9">
                     <!---->
-
+                    @if(Session::has('messages'))
+                        <div class="alert alert-success">{{ Session::get('messages') }}</div>
+                    @endif
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
@@ -386,7 +387,8 @@
                                     </div>
                                     <!-- /.box-header -->
                                     <!-- form start -->
-                                    <form class="form-horizontal" method="post" action="{{ url('/post/article') }}" enctype="multipart/form-data">
+                                    <form class="form-horizontal" method="post" action="{{ url('/post/article') }}"
+                                          enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="box-body">
                                             <textarea id="textareastatus" name="status"
@@ -397,7 +399,9 @@
                                         <div class="box-footer">
                                             <label class="btn btn-success">
                                                 Picture
-                                                <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_upload" style="display: none;" onchange="readURL(this);">
+                                                <input type="file" accept="image/jpg,image/jpeg,image/png"
+                                                       name="images_upload" style="display: none;"
+                                                       onchange="readURL(this);">
                                             </label>
                                             <button type="submit" class="btn btn-info pull-right">Post</button>
                                         </div>
@@ -544,9 +548,11 @@
                                 <div class="list-group-item">
                                     <a>
                                         @if($friend->avatar_url != null)
-                                            <img class="img-circle img-sm" src="{{ URL::asset($friend->avatar_url) }}" alt="User Image">
+                                            <img class="img-circle img-sm" src="{{ URL::asset($friend->avatar_url) }}"
+                                                 alt="User Image">
                                         @else
-                                            <img class="img-circle img-sm" src="{{ $friend->getAvatarUrl() }}" alt="User Image">
+                                            <img class="img-circle img-sm" src="{{ $friend->getAvatarUrl() }}"
+                                                 alt="User Image">
                                         @endif
                                         <span class="username">
                                             <strong>&nbsp;{{ $friend->firstname }} {{ $friend->lastname }}</strong>
@@ -571,7 +577,7 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         {{--<div class="pull-right hidden-xs">--}}
-            {{--<b>Version</b> 2.3.3--}}
+        {{--<b>Version</b> 2.3.3--}}
         {{--</div>--}}
         <strong>Copyright &copy; 2015-2016</strong>
     </footer>
@@ -834,9 +840,12 @@
                 <div class="modal-body">
                     <div class="form-group" style="text-align: center;">
                         @if(Auth::user()->avatar_url != null)
-                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar" alt="User Image" style="width: 160px;height: 160px;">
+                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar"
+                                 alt="User Image" style="width: 160px;height: 160px;">
                         @else
-                            <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                            <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
+                                 id="img_avatar" alt="User Image"
+                                 style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @endif
                     </div>
                 </div>
@@ -844,7 +853,8 @@
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                     <label class="btn btn-success">
                         Picture
-                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar" style="display: none;" onchange="readUrlAvatar(this);">
+                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar"
+                               style="display: none;" onchange="readUrlAvatar(this);">
                     </label>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
@@ -854,8 +864,80 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!-- jQuery 2.2.0 -->
 
+<div class="modal" id="editModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ url('/edit/article') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit status</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="area_edit_status" name="area_edit_status"></textarea>
+                    <input type="hidden" id="id_edit_status" name="id_edit_status" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="saveChangeStatus">Save changes</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal" id="editCommentModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="{{ url('/edit/comment') }}" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Edit comment</h4>
+                </div>
+                <div class="modal-body">
+                    <textarea id="area_edit_comment" name="area_edit_comment"></textarea>
+                    <input type="hidden" id="id_edit_comment" name="id_edit_comment" value="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="saveChangeComment">Save changes</button>
+                </div>
+            </div>
+        </form>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- jQuery 2.2.0 -->
+{{--<div class="modal" id="friendRequestModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">--}}
+{{--<div class="modal-dialog">--}}
+{{--<div class="modal-content">--}}
+{{--<div class="modal-header">--}}
+{{--<button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--<span aria-hidden="true">&times;</span></button>--}}
+{{--<h4 class="modal-title">Friends request</h4>--}}
+{{--</div>--}}
+{{--<form action="" method="" enctype="multipart/form-data">--}}
+{{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
+{{--<div class="modal-body">--}}
+{{--<div class="form-group" style="text-align: center;">--}}
+{{--</div>--}}
+{{--</div>--}}
+{{--<div class="modal-footer">--}}
+{{--<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>--}}
+{{--</div>--}}
+{{--</form>--}}
+{{--</div>--}}
+{{--<!-- /.modal-content -->--}}
+{{--</div>--}}
+{{--<!-- /.modal-dialog -->--}}
+{{--</div>--}}
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 <!-- FastClick -->
@@ -912,8 +994,9 @@
         font: 9pt Consolas;
         resize: none;
     }
-    .list-group-item a:hover{
-        cursor:pointer;
+
+    .list-group-item a:hover {
+        cursor: pointer;
     }
 
 </style>
@@ -945,15 +1028,15 @@
                 <!-- Conversations are loaded here -->
                 <div id="chat-body" class="direct-chat-messages" style="width: 270px; height: -300px; overflow: auto;">
                     <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg left">
-                    </div>
-                    <!-- /.direct-chat-msg -->
+                {{--<div class="direct-chat-msg left">--}}
+                {{--</div>--}}
+                {{--<!-- /.direct-chat-msg -->--}}
 
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                    </div>
+                {{--<!-- Message to the right -->--}}
+                {{--<div class="direct-chat-msg right">--}}
+                {{--</div>--}}
 
-                    <!-- /.direct-chat-msg -->
+                <!-- /.direct-chat-msg -->
                 </div>
                 <!--/.direct-chat-messages-->
 
@@ -966,6 +1049,8 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" id="my_id" name="my_id" value="{{ Auth::user()->id }}">
                         <input type="hidden" name="chat_id" id="user_recived" value="">
+                        <input type="hidden" name="sender_avatar" id="sender_avatar"
+                               value="{{ Auth::user()->avatar_url }}">
                         <input type="hidden" name="user_name" value="{{ Auth::user()->firstname }}">
                         {{--<input type="text" name="msg" placeholder="Type Message ..." class="form-control msg msg-box-chat">--}}
                         <input type="text" name="msg" placeholder="Write message ..." class="form-control msg">
@@ -1003,27 +1088,26 @@
         $('#chat-popup').append($clone);
         $("#chat-popup").find("#user_recived").val(chatid);
 
-        var baseUrl = $("#baseUrl").val()+ "/message/list";
+        var baseUrl = $("#baseUrl").val() + "/message/list";
         var myID = $("#myID").val();
         $.ajax({
             url: baseUrl,
             type: 'GET',
             dataType: 'json',
-            data: { 'id':$(this).closest(".list-group-item").find('#friend_id').val() },
+            data: {'id': $(this).closest(".list-group-item").find('#friend_id').val()},
             success: function (obj) {
                 console.log(obj);
                 $("#chat-popup").find(".direct-chat-messages").empty();
                 var messages = "";
-                $.each(obj.data.data,function(index,item){
-                    if(item.sender_id == myID) {
+                $.each(obj.data.data, function (index, item) {
+                    if (item.sender_id == myID) {
                         messages += "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
                                 + "You" + "</span> </div>"
-                                +"<img class='direct-chat-img' src='"
+                                + "<img class='direct-chat-img' src='"
                                 + item.sender_user_info.avatar_url + "' alt='Message User Image'>"
-                                +"<div class='direct-chat-text'>" + item.message + "</div> </div>";
+                                + "<div class='direct-chat-text'>" + item.message + "</div> </div>";
                     }
-                    else
-                    {
+                    else {
                         messages += "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
                                 + item.sender_user_info.firstname + "</span> </div>"
                                 + "<img class='direct-chat-img' src='"
@@ -1053,7 +1137,9 @@
         if (parseInt(data.user_id) == parseInt($("input[name='my_id']").val()) && parseInt(data.my_id) == parseInt(chatid)) {
             var message = "<div class='direct-chat-msg right'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-right' id='user'>"
                     + data.user_name + "</span> </div>"
-                    + "<img class='direct-chat-img' src='http://lorempixel.com/50/50/' alt='Message User Image'>"
+                    + "<img class='direct-chat-img' src='"
+                    + data.avatar
+                    + "' alt='Message User Image'>"
                     + "<div class='direct-chat-text'>" + data.message + "</div> </div>";
 
             $("#chat-popup").find(".direct-chat-messages").append(message);
@@ -1067,21 +1153,30 @@
         var user_id = $($this).find("input[name='chat_id']").val();
         var user_name = $($this).find("input[name='user_name']").val();
         var msg = $(this).parent().prev().val();
+        var avatar = $($this).find("input[name='sender_avatar']").val();
         if (msg != '') {
             $.ajax({
                 type: "POST",
                 url: '{!! URL::to("sendmessage") !!}',
                 dataType: "json",
-                data: {'_token': token, 'message': msg, 'user_name': user_name, 'user_id': user_id, 'my_id': my_id},
+                data: {
+                    '_token': token,
+                    'message': msg,
+                    'user_name': user_name,
+                    'user_id': user_id,
+                    'my_id': my_id,
+                    'avatar': avatar
+                },
                 success: function (data) {
                     $(".msg").val('');
 
                     var message = "<div class='direct-chat-msg left'> <div style='clear: both;'></div><div class='direct-chat-info clearfix'> <span class='direct-chat-name pull-left' id='user'>"
                             + "You" + "</span> </div>"
                             + "<img class='direct-chat-img' src='"
+                            + avatar
                             + "' alt='Message User Image'>"
                             + "<div class='direct-chat-text'>" + msg + "</div> </div>";
-                    $("#chat-popup").find(".direct-chat-messages").html(message);
+                    $("#chat-popup").find(".direct-chat-messages").append(message);
                 }
             });
         } else {

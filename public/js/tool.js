@@ -2,6 +2,7 @@ $(document).on('ready', function () {
     common.run();
     comment.run();
     showstatus.run();
+    showcomment.run();
 });
 
 var common = {
@@ -11,8 +12,8 @@ var common = {
         var socket = io.connect('http://localhost:8890');
         socket.on('like', function (data) {
             data = jQuery.parseJSON(data);
-            if(data.like == 0) {
-                $("#a_like_" + data.status_id).html("<i class='fa fa-thumbs-o-up margin-r-5'></i>Like ");
+            if(data.islike == 0) {
+                $("#a_like_" + data.status_id).html("Like <i class='fa fa-thumbs-o-up margin-r-5'></i>");
                 // console.log(data.status_id);
                 $(".count-" + data.status_id).text(
                     '(' + data.like + ')'
@@ -20,7 +21,7 @@ var common = {
             }
             else
             {
-                $("#a_like_" + data.status_id).html("<i class='fa fa-thumbs-o-down margin-r-5'></i>Dislike ");
+                $("#a_like_" + data.status_id).html("</i>Dislike <i class='fa fa-thumbs-o-up margin-r-5'>");
                 // console.log(data.status_id);
                 $(".count-" + data.status_id).text(
                     '(' + data.like + ')'
@@ -57,19 +58,19 @@ var comment = {
             data = jQuery.parseJSON(data);
             // console.log(data.comment_id);
 
-            if(data.likecm == 0) {
-                $("#a_like_cm_" + data.comment_id).html("<i class='fa fa-thumbs-o-up margin-r-5'></i>Like ");
+            if(data.islike == 0) {
+                $("#a_like_cm_" + data.comment_id).html("Like &nbsp;<i class='fa fa-thumbs-o-up margin-r-5'></i>");
                 // console.log(data.status_id);
                 $(".count-comment-" + data.comment_id).text(
-                    '(' + data.likecm + ')'
+                    "(" + data.likecm + ")"
                 );
             }
             else
             {
-                $("#a_like_cm_" + data.comment_id).html("<i class='fa fa-thumbs-o-down margin-r-5'></i>Dislike ");
+                $("#a_like_cm_" + data.comment_id).html("Dislike &nbsp;<i class='fa fa-thumbs-o-up margin-r-5'></i>");
                 // console.log(data.status_id);
                 $(".count-comment-" + data.comment_id).text(
-                    '(' + data.likecm + ')'
+                    "(" + data.likecm + ")"
                 );
             }
         });
@@ -115,7 +116,7 @@ var search = {
 var showstatus = {
     showeditStatus: function () {
         $(document).on('click', '.btn-edit-status', function (event) {
-            // event.preventDefault();
+            event.preventDefault();
             var statusbody = $(this).closest("#post_status").find("#body_status").text();
             var id_of_status = $(this).closest("#post_status").find("input[name='id_of_status']").val();
             console.log(id_of_status);
@@ -145,5 +146,41 @@ var showstatus = {
     ,
     run: function () {
         this.showeditStatus();
+    }
+}
+
+var showcomment = {
+    showeditComment: function () {
+        $(document).on('click', '.btn-edit-comment', function (event) {
+            event.preventDefault();
+            var commentbody = $(this).closest("#comment-text").find("#body_comment").text();
+            var id_of_comment = $(this).closest("#comment-text").find("input[name='id_of_comment']").val();
+            // console.log(commentbody);
+            $("#area_edit_comment").text(commentbody.trim());
+            $("#id_edit_comment").val(id_of_comment);
+            $("#editCommentModal").modal('show');
+        });
+        $(document).on('click', '#saveChangeComment', function (e) {
+            // e.preventDefault();
+            var comment_body = $(this).closest(".modal-content").find("#area_edit_comment").val();
+            var id_edit_comment = $(this).closest(".modal-content").find("input[name='id_edit_comment']").val();
+            console.log(comment_body);
+            $.post('/larasocial-master/edit/comment',
+                {
+                    "id_edit_comment": id_edit_comment,
+                    "area_edit_comment": comment_body
+                }, 'json'
+            ).done(function (data) {
+                console.log(JSON.stringify(data));
+                // $("#post_status").find("#body_status").text(data.newbody);
+                $('#editCommentModal').modal('hide');
+            }).error(function (err) {
+                console.log(err);
+            });
+        });
+    }
+    ,
+    run: function () {
+        this.showeditComment();
     }
 }

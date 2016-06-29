@@ -18,9 +18,12 @@
                 <div class="box box-primary">
                     <div class="box-body box-profile">
                         @if($user->avatar_url != null)
-                            <img class="profile-user-img img-responsive img-circle" src="{{ URL::asset($user->avatar_url) }}" alt="User Image" style="width: 128px;height: 128px;">
+                            <img class="profile-user-img img-responsive img-circle"
+                                 src="{{ URL::asset($user->avatar_url) }}" alt="User Image"
+                                 style="width: 128px;height: 128px;">
                         @else
-                            <img class="profile-user-img img-responsive img-circle" src="{{ $user->getAvatarUrl() }}" alt="User Image" style="width: 128px;height: 128px;">
+                            <img class="profile-user-img img-responsive img-circle" src="{{ $user->getAvatarUrl() }}"
+                                 alt="User Image" style="width: 128px;height: 128px;">
                         @endif
 
                         <h3 class="profile-username text-center"
@@ -42,16 +45,19 @@
                         @if(Auth::user()->id === $user->id)
                             <a class="btn btn-info btn-block"><b>Your Profile</b></a>
                         @elseif(empty(App\Users::checkFriendStatus(Auth::user()->id,$user->id)) && empty(App\Users::checkFriendStatus($user->id,Auth::user()->id)))
-                            <a href="{{ route('friends.add', ['id' => $user->id]) }}" class="btn btn-primary btn-block"><b>Add friend</b></a>
+                            <a href="{{ route('friends.add', ['id' => $user->id]) }}" class="btn btn-primary btn-block"><b>Add
+                                    friend</b></a>
                         @elseif(App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 1)
                             <a class="btn btn-info btn-block"><b>Waitting accept</b></a>
                         @elseif(App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 3)
-                            <a href="{{ route('friends.accept', ['id' => $user->id]) }}" class="btn btn-info btn-block"><b>Accept friend</b></a>
+                            <a href="{{ route('friends.accept', ['id' => $user->id]) }}" class="btn btn-info btn-block"><b>Accept
+                                    friend</b></a>
                         @elseif(
                             App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 2 ||
                             App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 4
                         )
-                            <a href="{{ route('friends.delete', ['id' => $user->id]) }}" class="btn btn-danger btn-block"><b>Unfriend</b></a>
+                            <a href="{{ route('friends.delete', ['id' => $user->id]) }}"
+                               class="btn btn-danger btn-block"><b>Unfriend</b></a>
 
                         @else
                         @endif
@@ -71,7 +77,7 @@
 
                         <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
                             @if($user->hometown)
-                            {{ $user->hometown }}
+                                {{ $user->hometown }}
                             @else
                                 Unknown
                             @endif
@@ -127,113 +133,19 @@
                         @foreach($status_user as $status)
                             {!!
                                view('pages.status',[
-                                  'status' => $status,
-                                  'user' => \App\Users::find($status->user_id),
-                                  'comments' => \App\Comment::where('status_id', $status->id)->orderBy('created_at','DESC')->get(),
-                                  //'comments_count' => \App\Comment::where('status_id', $status->id)->count(),
-                                  //'likes_count' => \App\Like::where('status_id', $status->id)->count()
+                                    'status' => $status,
+                                    'user' => \App\Users::find($status->user_id),
+                                    'comments' => \App\Comment::where('status_id', $status->id)->orderBy('created_at','DESC')->get(),
+                                    //'comments_count' => \App\Comment::where('status_id', $status->id)->count(),
+                                    //'likes_count' => \App\Like::where('status_id', $status->id)->count()
                                ])
                             !!}
                         @endforeach
-                            {{ $status_user->render() }}
-                            <!-- /.post -->
+                        {{ $status_user->render() }}
+                        <!-- /.post -->
                         </div>
                         <!-- /.tab-pane -->
-                    {{--<div class="tab-pane" id="timeline">--}}
-                    {{--<!-- The timeline -->--}}
-                    {{--<ul class="timeline timeline-inverse">--}}
-                    {{--<!-- timeline time label -->--}}
-                    {{--<li class="time-label">--}}
-                    {{--<span class="bg-red">--}}
-                    {{--10 Feb. 2014--}}
-                    {{--</span>--}}
-                    {{--</li>--}}
-                    {{--<!-- /.timeline-label -->--}}
-                    {{--<!-- timeline item -->--}}
-                    {{--<li>--}}
-                    {{--<i class="fa fa-envelope bg-blue"></i>--}}
 
-                    {{--<div class="timeline-item">--}}
-                    {{--<span class="time"><i class="fa fa-clock-o"></i> 12:05</span>--}}
-
-                    {{--<h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>--}}
-
-                    {{--<div class="timeline-body">--}}
-                    {{--Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,--}}
-                    {{--weebly ning heekya handango imeem plugg dopplr jibjab, movity--}}
-                    {{--jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle--}}
-                    {{--quora plaxo ideeli hulu weebly balihoo...--}}
-                    {{--</div>--}}
-                    {{--<div class="timeline-footer">--}}
-                    {{--<a class="btn btn-primary btn-xs">Read more</a>--}}
-                    {{--<a class="btn btn-danger btn-xs">Delete</a>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<!-- END timeline item -->--}}
-                    {{--<!-- timeline item -->--}}
-                    {{--<li>--}}
-                    {{--<i class="fa fa-user bg-aqua"></i>--}}
-
-                    {{--<div class="timeline-item">--}}
-                    {{--<span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>--}}
-
-                    {{--<h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request--}}
-                    {{--</h3>--}}
-                    {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<!-- END timeline item -->--}}
-                    {{--<!-- timeline item -->--}}
-                    {{--<li>--}}
-                    {{--<i class="fa fa-comments bg-yellow"></i>--}}
-
-                    {{--<div class="timeline-item">--}}
-                    {{--<span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>--}}
-
-                    {{--<h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>--}}
-
-                    {{--<div class="timeline-body">--}}
-                    {{--Take me to your leader!--}}
-                    {{--Switzerland is small and neutral!--}}
-                    {{--We are more like Germany, ambitious and misunderstood!--}}
-                    {{--</div>--}}
-                    {{--<div class="timeline-footer">--}}
-                    {{--<a class="btn btn-warning btn-flat btn-xs">View comment</a>--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<!-- END timeline item -->--}}
-                    {{--<!-- timeline time label -->--}}
-                    {{--<li class="time-label">--}}
-                    {{--<span class="bg-green">--}}
-                    {{--3 Jan. 2014--}}
-                    {{--</span>--}}
-                    {{--</li>--}}
-                    {{--<!-- /.timeline-label -->--}}
-                    {{--<!-- timeline item -->--}}
-                    {{--<li>--}}
-                    {{--<i class="fa fa-camera bg-purple"></i>--}}
-
-                    {{--<div class="timeline-item">--}}
-                    {{--<span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>--}}
-
-                    {{--<h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>--}}
-
-                    {{--<div class="timeline-body">--}}
-                    {{--<img src="http://placehold.it/150x100" alt="..." class="margin">--}}
-                    {{--<img src="http://placehold.it/150x100" alt="..." class="margin">--}}
-                    {{--<img src="http://placehold.it/150x100" alt="..." class="margin">--}}
-                    {{--<img src="http://placehold.it/150x100" alt="..." class="margin">--}}
-                    {{--</div>--}}
-                    {{--</div>--}}
-                    {{--</li>--}}
-                    {{--<!-- END timeline item -->--}}
-                    {{--<li>--}}
-                    {{--<i class="fa fa-clock-o bg-gray"></i>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
-                    {{--</div>--}}
-                    <!-- /.tab-pane -->
 
                         <div class="tab-pane" id="settings">
                             <form class="form-horizontal" action="{{ url('/edit/user') }}" method="post">
@@ -241,7 +153,8 @@
                                 <div class="form-group">
                                     <label for="inputFirstname" class="col-sm-2 control-label">Firstname</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputFirstname" name="inputFirstname"
+                                        <input type="text" class="form-control" id="inputFirstname"
+                                               name="inputFirstname"
                                                placeholder="Firsname" value="{{ $user->firstname }}">
                                     </div>
                                 </div>
@@ -287,7 +200,8 @@
                                     <label for="inputCurentcity" class="col-sm-2 control-label">Curent city</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputCurentcity" name="inputCurentcity"
+                                        <input type="text" class="form-control" id="inputCurentcity"
+                                               name="inputCurentcity"
                                                placeholder="Curent city" value="{{ $user->currentcity }}">
                                     </div>
                                 </div>
@@ -300,14 +214,14 @@
                                     </div>
                                 </div>
                                 {{--<div class="form-group">--}}
-                                    {{--<div class="col-sm-offset-2 col-sm-10">--}}
-                                        {{--<div class="checkbox">--}}
-                                            {{--<label>--}}
-                                                {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
-                                                    {{--conditions</a>--}}
-                                            {{--</label>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
+                                {{--<div class="col-sm-offset-2 col-sm-10">--}}
+                                {{--<div class="checkbox">--}}
+                                {{--<label>--}}
+                                {{--<input type="checkbox"> I agree to the <a href="#">terms and--}}
+                                {{--conditions</a>--}}
+                                {{--</label>--}}
+                                {{--</div>--}}
+                                {{--</div>--}}
                                 {{--</div>--}}
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
@@ -522,4 +436,53 @@
     <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
+    <div class="modal" id="editModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ url('/edit/article') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit status</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="area_edit_status" name="area_edit_status"></textarea>
+                        <input type="hidden" id="id_edit_status" name="id_edit_status" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="saveChangeStatus">Save changes</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal" id="editCommentModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <form action="{{ url('/edit/comment') }}" method="post">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Edit comment</h4>
+                    </div>
+                    <div class="modal-body">
+                        <textarea id="area_edit_comment" name="area_edit_comment"></textarea>
+                        <input type="hidden" id="id_edit_comment" name="id_edit_comment" value="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="saveChangeComment">Save changes</button>
+                    </div>
+                </div>
+            </form>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 @stop

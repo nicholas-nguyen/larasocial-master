@@ -10,9 +10,9 @@
             <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ $status->user->firstname }} {{ $status->user->lastname }}</a>
             @if(Auth::user()->id == $status->user->id)
                 <a href="{{ route('/delete/article', ['id' => $status->id]) }}"
-                   class="pull-right btn-box-tool" onclick="return accept()"><i class="fa fa-times"></i></a>
-                <a href="#" class="pull-right btn-box-tool btn-edit-status"><i
-                            class="fa fa-edit"></i></a>
+                   class="pull-right btn-box-tool" onclick="return accept()" alt="delete"><i class="fa fa-times"></i></a>
+                <a href="" class="pull-right btn-box-tool btn-edit-status"><i
+                            class="fa fa-edit" alt="edit"></i></a>
             @endif
         </div>
         <span class="description">{{ $status->created_at->diffForHumans() }}</span>
@@ -25,7 +25,8 @@
     <div style="clear: both"></div>
     @if($status->image_url != null)
         <div style="text-align:center;">
-            <img style="display: block;margin: auto;max-width: 100%;max-height: 100%;padding-top: 10px;" src="{{URL::asset($status->image_url)}}" alt="Your Picture">
+            <img style="display: block;margin: auto;max-width: 100%;max-height: 100%;padding-top: 10px;"
+                 src="{{URL::asset($status->image_url)}}" alt="Your Picture">
         </div>
     @endif
     <ul class="list-inline" style="padding-top: 10px;">
@@ -35,11 +36,13 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="status_id" value="{{ $status->id }}"/>
                 @if($status->likes()->where('user_id', Auth::user()->id)->count() == 0)
-                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-up margin-r-5"></i>Like </a>
+                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn"
+                       id="a_like_{{ $status->id }}"></i>Like &nbsp;<i class="fa fa-thumbs-o-up margin-r-5"></i></a>
                 @else
-                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-down margin-r-5"></i>Dislike </a>
+                    <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn"
+                       id="a_like_{{ $status->id }}">Dislike &nbsp;<i class="fa fa-thumbs-o-up margin-r-5"></i></a>
                 @endif
-                    <span class="count count-{{ $status->id }}">({{ $status->likes->count() }})</span>
+                <span class="count count-{{ $status->id }}">({{ $status->likes->count() }})</span>
             </form>
 
         </li>
@@ -80,23 +83,39 @@
                                      src="{{URL::asset(\App\Users::find($comment->user_id)->getAvatarUrl() )}}"
                                      alt="User Image">
                             @endif
-                            <div class="comment-text">
-                              <span class="username">
+                            <div class="comment-text" id="comment-text">
+                              <span class="username" style="margin-bottom: 15px;">
                                 <a href="{{ route('profile.index',['id' => $user->id]) }}">{{ \App\Users::find($comment->user_id)->firstname }} {{ \App\Users::find($comment->user_id)->lastname }}</a>
-                                  <span class="text-muted pull-right">{{ $comment->created_at->diffForHumans() }}</span>
+                                  <span class="text-muted"> - {{ $comment->created_at->diffForHumans() }}</span>
+                                  @if(Auth::user()->id == $comment->user->id)
+                                      <a href="{{ route('/comment/delete', ['id' => $comment->id]) }}"
+                                         class="pull-right btn-box-tool" onclick="return accept()" alt="delete"><i
+                                                  class="fa fa-times"></i></a>
+                                      <a href="" class="pull-right btn-box-tool btn-edit-comment" alt="edit"><i
+                                                  class="fa fa-edit"></i></a>
+                                  @endif
                               </span><!-- /.username -->
-                                {{ $comment->comment }}
+
+                                <span id="body_comment" style="margin-top: 20px;">
+                                    {{ $comment->comment }}
+                                    <input type="hidden" id="id_of_comment" name="id_of_comment" value="{{ $comment->id }}">
+                                </span>
                             </div>
                             <div style="margin-left: 40px;">
                                 <form method="POST" id="likecommentform" action="">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="hidden" name="comment_id" value="{{ $comment->id }}"/>
                                     @if($comment->likes()->where('user_id', Auth::user()->id)->count() == 0)
-                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit" class="link-black text-sm like-comment-btn"><i class="fa fa-thumbs-o-up margin-r-5"></i>Like </a>
+                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit"
+                                           class="link-black text-sm like-comment-btn">Like <i
+                                                    class="fa fa-thumbs-o-up margin-r-5"></i></a>
                                     @else
-                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit" class="link-black text-sm like-btn" id="a_like_{{ $status->id }}"><i class="fa fa-thumbs-o-down margin-r-5"></i>Dislike </a>
+                                        <a href="" id="a_like_cm_{{ $comment->id }}" type="submit"
+                                           class="link-black text-sm like-comment-btn">Dislike <i
+                                                    class="fa fa-thumbs-o-up margin-r-5"></i></a>
                                     @endif
-                                    <span class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }})
+                                    <span class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }}
+                                        )
                                     </span>
                                 </form>
                             </div>
@@ -111,31 +130,6 @@
     </div>
 </div>
 
-
-<div class="modal" id="editModal" tabindex="-1" aria-labelledby="postModal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <form action="{{ url('/edit/article') }}" method="post">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Edit status</h4>
-                </div>
-                <div class="modal-body">
-                    <textarea id="area_edit_status" name="area_edit_status"></textarea>
-                    <input type="hidden" id="id_edit_status" name="id_edit_status" value="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="saveChangeStatus">Save changes</button>
-                </div>
-            </div>
-        </form>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
 <!-- /.modal -->
 <script type="text/javascript">
     function accept() {
@@ -151,6 +145,15 @@
     }
 
     #area_edit_status {
+        border: 1px #ddd solid;
+        top: 5px;
+        width: 100%;
+        height: auto;
+        left: 5px;
+        font: 9pt Consolas;
+        resize: none;
+    }
+    #area_edit_comment {
         border: 1px #ddd solid;
         top: 5px;
         width: 100%;

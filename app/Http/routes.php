@@ -101,16 +101,26 @@ Route::post('/comment/like',[
     'middleware' => ['auth'],
 ]);
 
+Route::get('/comment/delete/{id}',[
+    'uses'   => 'PostController@deleteComment',
+    'as'     => '/comment/delete',
+    'middleware' => ['auth'],
+]);
+Route::post('edit/comment',[
+    'uses'   => 'PostController@editComment',
+    'as'     => '/edit/comment',
+    'middleware' => ['auth'],
+]);
 Route::post('/change-password',[
     'uses'   => 'UserController@changePassword',
     'as'     => '/change-password',
     'middleware' => ['auth'],
 ]);
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-    Route::get('/home', 'HomeController@index');
-});
+//Route::group(['middleware' => 'web'], function () {
+//    Route::auth();
+//    Route::get('/home', 'HomeController@index');
+//});
 Route::post('sendmessage', 'ChatController@sendMessage');
 
 Route::get('message/list','MessageController@getList');

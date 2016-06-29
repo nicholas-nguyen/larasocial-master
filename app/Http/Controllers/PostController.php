@@ -26,11 +26,12 @@ class PostController extends Controller
 
         $user = Users::where('id',Auth::user()->id)->first();
         $friends = $user->friends();
+        $request = $user->friendRequests();
         $statuses = Status::where(function ($query) {
             return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Users::where('id', Auth::user()->id)->first()->friends()->lists('id'));
         })->orderBy('created_at', 'desc')->simplePaginate(10);
 
-        return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends);
+        return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends)->with('request',$request);
     }
 
     public function postArticle(Request $request)
@@ -110,7 +111,15 @@ class PostController extends Controller
         File::delete($images);
 
         $delArticle -> delete();
+        \Session::flash('messages',"Status have been delete");
+        return redirect()->back();
+    }
 
+    public function deleteComment($id){
+        $delComment = Comment::where('id',$id)->first();
+        $delComment -> delete();
+
+        \Session::flash('messages',"Coment have been delete");
         return redirect()->back();
     }
 
@@ -123,6 +132,19 @@ class PostController extends Controller
         $status->save();
 
         \Session::flash('messages',"Status have been changed");
+        return redirect()->back();
+//        return response()->json(array('newbody' => $status->body),200);
+    }
+
+    public function editComment(Request $request){
+        $edit_id = Input::get("id_edit_comment");
+        $comment = Comment::find($edit_id);
+
+
+        $comment->comment = Input::get("area_edit_comment");
+        $comment->save();
+
+        \Session::flash('messages',"Comment have been changed");
         return redirect()->back();
 //        return response()->json(array('newbody' => $status->body),200);
     }
@@ -144,8 +166,9 @@ class PostController extends Controller
             });
             $delike->delete();
             $response = $seStatus->likes->count();
+            $islike = Status::find($statusID)->likes()->where('user_id', Auth::user()->id)->count();
             $redis = LRedis::connection();
-            $data = ['like' => $response, 'status_id' => Input::get('status_id')];
+            $data = ['like' => $response, 'status_id' => Input::get('status_id'),'islike' => $islike];
             $redis->publish('like', json_encode($data));
             return response()->json([]);
         } else {
@@ -156,8 +179,9 @@ class PostController extends Controller
         }
 
         $response = $seStatus->likes->count();
+        $islike = Status::find($statusID)->likes()->where('user_id', Auth::user()->id)->count();
         $redis = LRedis::connection();
-        $data = ['like' => $response, 'status_id' => Input::get('status_id')];
+        $data = ['like' => $response, 'status_id' => Input::get('status_id'),'islike' => $islike];
         $redis->publish('like', json_encode($data));
         return response()->json([]);
         //return Response::json(array('count_like' => $response));
@@ -182,8 +206,9 @@ class PostController extends Controller
             });
             $delikecm->delete();
             $response = $selComment->likes->count();
+            $islike = Comment::find($commentID)->likes()->where('user_id', Auth::user()->id)->count();
             $redis = LRedis::connection();
-            $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id')];
+            $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id'),'islike' => $islike];
             $redis->publish('likecm', json_encode($data));
             return response()->json([]);
         } else {
@@ -194,8 +219,9 @@ class PostController extends Controller
         }
 
         $response = $selComment->likes->count();
+        $islike = Comment::find($commentID)->likes()->where('user_id', Auth::user()->id)->count();
         $redis = LRedis::connection();
-        $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id')];
+        $data = ['likecm' => $response, 'comment_id' => Input::get('comment_id'),'islike' => $islike];
         $redis->publish('likecm', json_encode($data));
         return response()->json([]);
     }

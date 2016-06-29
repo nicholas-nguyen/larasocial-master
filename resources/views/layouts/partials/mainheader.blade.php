@@ -59,59 +59,70 @@
                 <li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                        <i class="fa  fa-users"></i>
+                        @if($request->count() != 0)
+                            <span class="label label-warning">{{  $request->count() }}</span>
+                        @else
+                            <span class="label label-warning"></span>
+                        @endif
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.notifications') }}</li>
+                        <li class="header">You have {{ $request->count() }} friend request</li>
                         <li>
-                            <!-- Inner Menu: contains the notifications -->
+                            <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                <li><!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> {{ trans('adminlte_lang::message.newmembers') }}
-                                    </a>
-                                </li><!-- end notification -->
+                                @foreach($request as $r)
+                                    <li>
+                                        <a href="{{ route('profile.index',['id' => $r->id])}}">
+                                            @if($r->avatar_url != null)
+                                                <img class="img-circle img-sm" src="{{ URL::asset($r->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
+                                            @else
+                                                <img class="img-circle img-sm" src="{{ $r->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                                            @endif
+                                            <span class="hidden-xs">{{ $r->firstname }} {{ $r->lastname }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
                         <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
                     </ul>
                 </li>
                 <!-- Tasks Menu -->
-                <li class="dropdown tasks-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>
-                        <li>
-                            <!-- Inner menu: contains the tasks -->
-                            <ul class="menu">
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <!-- Task title and progress text -->
-                                        <h3>
-                                            {{ trans('adminlte_lang::message.tasks') }}
-                                            <small class="pull-right">20%</small>
-                                        </h3>
-                                        <!-- The progress bar -->
-                                        <div class="progress xs">
-                                            <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li><!-- end task item -->
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>
-                        </li>
-                    </ul>
-                </li>
+                {{--<li class="dropdown tasks-menu">--}}
+                    {{--<!-- Menu Toggle Button -->--}}
+                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
+                        {{--<i class="fa fa-flag-o"></i>--}}
+                        {{--<span class="label label-danger">9</span>--}}
+                    {{--</a>--}}
+                    {{--<ul class="dropdown-menu">--}}
+                        {{--<li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>--}}
+                        {{--<li>--}}
+                            {{--<!-- Inner menu: contains the tasks -->--}}
+                            {{--<ul class="menu">--}}
+                                {{--<li><!-- Task item -->--}}
+                                    {{--<a href="#">--}}
+                                        {{--<!-- Task title and progress text -->--}}
+                                        {{--<h3>--}}
+                                            {{--{{ trans('adminlte_lang::message.tasks') }}--}}
+                                            {{--<small class="pull-right">20%</small>--}}
+                                        {{--</h3>--}}
+                                        {{--<!-- The progress bar -->--}}
+                                        {{--<div class="progress xs">--}}
+                                            {{--<!-- Change the css width attribute to simulate progress -->--}}
+                                            {{--<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">--}}
+                                                {{--<span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</a>--}}
+                                {{--</li><!-- end task item -->--}}
+                            {{--</ul>--}}
+                        {{--</li>--}}
+                        {{--<li class="footer">--}}
+                            {{--<a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                {{--</li>--}}
                 @if (Auth::guest())
                     <li><a href="{{ url('/register') }}">{{ trans('adminlte_lang::message.register') }}</a></li>
                     <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
@@ -240,18 +251,21 @@
                 <div class="modal-body">
                     <div class="form-group" style="text-align: center;">
                         @if(Auth::user()->avatar_url != null)
-                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                            <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar"
+                                 alt="User Image" style="width: 160px;height: 160px;">
                         @else
-                            <img class="text-center" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" id="img_avatar" alt="User Image" style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                            <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
+                                 id="img_avatar" alt="User Image"
+                                 style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @endif
-                        {{--<img style="text-align: center;" id="img_avatar" src="" alt="Your Avatar"/>--}}
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
                     <label class="btn btn-success">
                         Picture
-                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar" style="display: none;" onchange="readUrlAvatar(this);">
+                        <input type="file" accept="image/jpg,image/jpeg,image/png" name="images_avatar"
+                               style="display: none;" onchange="readUrlAvatar(this);">
                     </label>
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
@@ -261,3 +275,20 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
+
+<script type="text/javascript">
+    function readUrlAvatar(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#img_avatar')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

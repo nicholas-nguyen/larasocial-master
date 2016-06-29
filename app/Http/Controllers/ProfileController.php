@@ -16,8 +16,10 @@ class ProfileController extends Controller
         if(!$user){
             abort(404);
         }
+        $request = $user->friendRequests();
+
         $status_user = Status::where('user_id',$id)->orderBy('created_at', 'desc')->simplePaginate(10);;
-        return view('users.profile-user')->with('user',$user)->with('status_user',$status_user);
+        return view('users.profile-user')->with('user',$user)->with('status_user',$status_user)->with('request', $request);
     }
 
     public function editProfile(){

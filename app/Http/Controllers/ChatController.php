@@ -21,7 +21,8 @@ class ChatController extends Controller
             'message' => Input::get('message'),
             'user_id' => Input::get('user_id'),
             'user_name' => Input::get('user_name'),
-            'my_id' => Input::get('my_id')
+            'my_id' => Input::get('my_id'),
+            'avatar' => Input::get('avatar')
         ];
 
         //save record
