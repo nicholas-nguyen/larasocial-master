@@ -58,7 +58,7 @@
                 <!-- Notifications Menu -->
                 <li class="dropdown notifications-menu">
                     <!-- Menu toggle button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Friend request">
                         <i class="fa  fa-users"></i>
                         @if($request->count() != 0)
                             <span class="label label-warning">{{  $request->count() }}</span>
@@ -155,16 +155,16 @@
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change Avatar</a>
+                                <div class="col-xs-6 text-center">
+                                    <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change <br>Avatar</a>
                                 </div>
-                                <div class="col-xs-4 text-center">
+                                <div class="col-xs-6 text-center">
                                     <a href="#" data-toggle="modal" data-target="#changepassModal">Change
-                                        password</a>
+                                        <br>password</a>
                                 </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
-                                </div>
+                                {{--<div class="col-xs-4 text-center">--}}
+                                    {{--<a href="#">{{ trans('adminlte_lang::message.friends') }}</a>--}}
+                                {{--</div>--}}
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">

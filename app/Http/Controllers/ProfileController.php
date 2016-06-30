@@ -31,7 +31,10 @@ class ProfileController extends Controller
         $user->gender = Input::get("selectGender");
         $user->hometown = Input::get("inputHometown");
         $user->currentcity = Input::get("inputCurentcity");
-
+        $user->school = Input::get("inputSchool");
+        $user->skills = Input::get("inputSkills");
+        $user->hobby = Input::get("inputHobby");
+        
         $user->save();
 
         \Session::flash('messages',"User information have been changed");

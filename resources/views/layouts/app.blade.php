@@ -31,6 +31,11 @@ desired effect
 -->
 <body class="skin-blue sidebar-mini">
 <script src="{{ asset('public/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+<script src="{{ asset('public/css/jquery-ui.css') }}"></script>
+<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script src="{{ asset('public/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
+<script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('public/js/tool.js') }}"></script>
 <div class="wrapper">
 

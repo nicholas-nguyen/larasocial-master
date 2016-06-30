@@ -23,6 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('avatar_url');
             $table->string('hometown');
             $table->string('currentcity');
+            $table->string('school');
+            $table->string('skills');
+            $table->string('hobby');
             $table->rememberToken();
             $table->timestamps();
         });

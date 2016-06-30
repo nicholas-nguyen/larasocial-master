@@ -31,6 +31,7 @@
 <script src="{{ asset('public/js/jquery-2.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('public/js/tool.js') }}"></script>
 <div class="wrapper">
 
@@ -172,88 +173,7 @@
                         </ul>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
-                {{--<li class="dropdown tasks-menu">--}}
-                {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                {{--<i class="fa fa-flag-o"></i>--}}
-                {{--<span class="label label-danger">9</span>--}}
-                {{--</a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                {{--<li class="header">You have 9 tasks</li>--}}
-                {{--<li>--}}
-                {{--<!-- inner menu: contains the actual data -->--}}
-                {{--<ul class="menu">--}}
-                {{--<li><!-- Task item -->--}}
-                {{--<a href="#">--}}
-                {{--<h3>--}}
-                {{--Design some buttons--}}
-                {{--<small class="pull-right">20%</small>--}}
-                {{--</h3>--}}
-                {{--<div class="progress xs">--}}
-                {{--<div class="progress-bar progress-bar-aqua" style="width: 20%"--}}
-                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
-                {{--aria-valuemax="100">--}}
-                {{--<span class="sr-only">20% Complete</span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end task item -->--}}
-                {{--<li><!-- Task item -->--}}
-                {{--<a href="#">--}}
-                {{--<h3>--}}
-                {{--Create a nice theme--}}
-                {{--<small class="pull-right">40%</small>--}}
-                {{--</h3>--}}
-                {{--<div class="progress xs">--}}
-                {{--<div class="progress-bar progress-bar-green" style="width: 40%"--}}
-                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
-                {{--aria-valuemax="100">--}}
-                {{--<span class="sr-only">40% Complete</span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end task item -->--}}
-                {{--<li><!-- Task item -->--}}
-                {{--<a href="#">--}}
-                {{--<h3>--}}
-                {{--Some task I need to do--}}
-                {{--<small class="pull-right">60%</small>--}}
-                {{--</h3>--}}
-                {{--<div class="progress xs">--}}
-                {{--<div class="progress-bar progress-bar-red" style="width: 60%"--}}
-                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
-                {{--aria-valuemax="100">--}}
-                {{--<span class="sr-only">60% Complete</span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end task item -->--}}
-                {{--<li><!-- Task item -->--}}
-                {{--<a href="#">--}}
-                {{--<h3>--}}
-                {{--Make beautiful transitions--}}
-                {{--<small class="pull-right">80%</small>--}}
-                {{--</h3>--}}
-                {{--<div class="progress xs">--}}
-                {{--<div class="progress-bar progress-bar-yellow" style="width: 80%"--}}
-                {{--role="progressbar" aria-valuenow="20" aria-valuemin="0"--}}
-                {{--aria-valuemax="100">--}}
-                {{--<span class="sr-only">80% Complete</span>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</a>--}}
-                {{--</li>--}}
-                {{--<!-- end task item -->--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                {{--<li class="footer">--}}
-                {{--<a href="#">View all tasks</a>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</li>--}}
-                <!-- User Account: style can be found in dropdown.less -->
+
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             @if(Auth::user()->avatar_url != null)
@@ -285,17 +205,17 @@
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
-                                    <div class="col-xs-4 text-center">
+                                    <div class="col-xs-6 text-center">
                                         <a href="#" data-toggle="modal" data-target="#changeavatarModal">Change
-                                            Avatar</a>
+                                            <br>Avatar</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
+                                    <div class="col-xs-6 text-center">
                                         <a href="#" data-toggle="modal" data-target="#changepassModal">Change
-                                            password</a>
+                                            <br>password</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#" data-toggle="modal" data-target="#friendRequestModal">Friends</a>
-                                    </div>
+                                    {{--<div class="col-xs-4 text-center">--}}
+                                        {{--<a href="#" data-toggle="modal" data-target="#friendRequestModal">Friends</a>--}}
+                                    {{--</div>--}}
                                 </div>
                                 <!-- /.row -->
                             </li>
@@ -939,7 +859,7 @@
 {{--<!-- /.modal-dialog -->--}}
 {{--</div>--}}
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+
 <!-- FastClick -->
 <script src="{{ asset('public/plugins/fastclick/fastclick.js') }}"></script>
 <!-- AdminLTE App -->

@@ -97,21 +97,39 @@
 
                         <hr>
 
-                        <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                        <strong><i class="glyphicon glyphicon-book"></i> School</strong>
 
-                        <p>
-                            <span class="label label-danger">UI Design</span>
-                            <span class="label label-success">Coding</span>
-                            <span class="label label-info">Javascript</span>
-                            <span class="label label-warning">PHP</span>
-                            <span class="label label-primary">Node.js</span>
+                        <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
+                            @if($user->school)
+                                {{ $user->school }}
+                            @else
+                                Unknown
+                            @endif
                         </p>
 
                         <hr>
 
-                        <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                        <strong><i class="glyphicon glyphicon-wrench"></i> Skills</strong>
 
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                        <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
+                            @if($user->skills)
+                                {{ $user->skills }}
+                            @else
+                                Unknown
+                            @endif
+                        </p>
+
+                        <hr>
+
+                        <strong><i class="glyphicon glyphicon-tags"></i>&nbsp; Hobby</strong>
+
+                        <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
+                            @if($user->hobby)
+                                {{ $user->hobby }}
+                            @else
+                                Unknown
+                            @endif
+                        </p>
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -206,11 +224,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="inputSchool" class="col-sm-2 control-label">School</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputSchool" name="inputSchool"
+                                               placeholder="School" value="{{ $user->school }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
 
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="inputSkills"
-                                               placeholder="Skills">
+                                        <input type="text" class="form-control" id="inputSkills" name="inputSkills"
+                                               placeholder="Skills" value="{{ $user->skills }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputHobby" class="col-sm-2 control-label">Hobby</label>
+
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputHobby" name="inputHobby"
+                                               placeholder="Hobby" value="{{ $user->hobby }}">
                                     </div>
                                 </div>
                                 {{--<div class="form-group">--}}
