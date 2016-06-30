@@ -37,12 +37,12 @@
                 <input type="hidden" name="status_id" value="{{ $status->id }}"/>
                 @if($status->likes()->where('user_id', Auth::user()->id)->count() == 0)
                     <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn"
-                       id="a_like_{{ $status->id }}"></i>Like &nbsp;<i class="fa fa-thumbs-o-up margin-r-5"></i></a>
+                       id="a_like_{{ $status->id }}"></i>Like &nbsp;</a>
                 @else
                     <a href="" style="margin-left: 15px;" type="submit" class="link-black text-sm like-btn"
-                       id="a_like_{{ $status->id }}">Dislike &nbsp;<i class="fa fa-thumbs-o-up margin-r-5"></i></a>
+                       id="a_like_{{ $status->id }}">Dislike &nbsp;</a>
                 @endif
-                <span class="count count-{{ $status->id }}">({{ $status->likes->count() }})</span>
+                <span class="count count-{{ $status->id }}">({{ $status->likes->count() }}) <i class="fa fa-thumbs-o-up margin-r-5"></i></span>
             </form>
 
         </li>
@@ -107,15 +107,13 @@
                                     <input type="hidden" name="comment_id" value="{{ $comment->id }}"/>
                                     @if($comment->likes()->where('user_id', Auth::user()->id)->count() == 0)
                                         <a href="" id="a_like_cm_{{ $comment->id }}" type="submit"
-                                           class="link-black text-sm like-comment-btn">Like <i
-                                                    class="fa fa-thumbs-o-up margin-r-5"></i></a>
+                                           class="link-black text-sm like-comment-btn">Like &nbsp;</a>
                                     @else
                                         <a href="" id="a_like_cm_{{ $comment->id }}" type="submit"
-                                           class="link-black text-sm like-comment-btn">Dislike <i
-                                                    class="fa fa-thumbs-o-up margin-r-5"></i></a>
+                                           class="link-black text-sm like-comment-btn">Dislike &nbsp;</a>
                                     @endif
-                                    <span class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }}
-                                        )
+                                    <span class="count count-comment-{{ $comment->id }}"> ({{ $comment->likes->count() }})<i
+                                                class="fa fa-thumbs-o-up margin-r-5"></i>
                                     </span>
                                 </form>
                             </div>
