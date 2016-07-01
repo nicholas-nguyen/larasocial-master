@@ -38,7 +38,7 @@ class UserController extends Controller
             $users->password = Hash::make($dulieu_dk["Password"]);
 
             $users->save();
-           \Session::flash('messages','Bạn đã đăng ký thành công!!! Hãy đăng nhập ngay bây giờ!!!');
+           \Session::flash('messages','Regster success!!!');
             return redirect('login');
             Auth::login($users);
         } else {

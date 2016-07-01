@@ -35,9 +35,9 @@
                                         <div class="pull-left">
                                             <!-- User Image -->
                                             @if(Auth::user()->avatar_url != null)
-                                                <img class="img-circle" src="{{URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
+                                                <img class="img-circle img-sm" src="{{URL::asset(Auth::user()->avatar_url) }}" alt="User Image" style="width: 160px;height: 160px;">
                                             @else
-                                                <img class="img-circle" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
+                                                <img class="img-circle img-sm" src="{{ \App\Users::where('id',Auth::user()->id)->first()->getAvatarUrl() }}" alt="User Image" style="width: 160px;height: 160px;">
                                             @endif
                                         </div>
                                         <!-- Message title and timestamp -->
@@ -60,18 +60,18 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Friend request">
                         <i class="fa  fa-users"></i>
-                        @if($request->count() != 0)
-                            <span class="label label-warning">{{  $request->count() }}</span>
+                        @if(\App\Users::friendRequests()->count() != 0)
+                            <span class="label label-warning">{{ \App\Users::friendRequests()->count() }}</span>
                         @else
                             <span class="label label-warning"></span>
                         @endif
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ $request->count() }} friend request</li>
+                        <li class="header">You have {{  \App\Users::friendRequests()->count() }} friend request</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
                             <ul class="menu">
-                                @foreach($request as $r)
+                                @foreach(\App\Users::friendRequests() as $r)
                                     <li>
                                         <a href="{{ route('profile.index',['id' => $r->id])}}">
                                             @if($r->avatar_url != null)
@@ -87,6 +87,12 @@
                         </li>
                         <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
                     </ul>
+                </li>
+                <li class="dropdown notifications-menu">
+                    <!-- Menu toggle button -->
+                    <a href="{{ url('/dashboard') }}" ><i class="glyphicon glyphicon-th-large"></i>
+                        Dashboard
+                    </a>
                 </li>
                 <!-- Tasks Menu -->
                 {{--<li class="dropdown tasks-menu">--}}

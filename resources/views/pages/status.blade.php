@@ -25,7 +25,7 @@
     <div style="clear: both"></div>
     @if($status->image_url != null)
         <div style="text-align:center;">
-            <img style="display: block;margin: auto;max-width: 100%;max-height: 100%;padding-top: 10px;"
+            <img style="width: 70%; height:auto;display: block;margin: auto;max-width: 100%;max-height: 100%;padding-top: 10px;"
                  src="{{URL::asset($status->image_url)}}" alt="Your Picture">
         </div>
     @endif

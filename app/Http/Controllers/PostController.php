@@ -26,12 +26,11 @@ class PostController extends Controller
 
         $user = Users::where('id',Auth::user()->id)->first();
         $friends = $user->friends();
-        $request = $user->friendRequests();
         $statuses = Status::where(function ($query) {
             return $query->where('user_id', Auth::user()->id)->orWhereIn('user_id', Users::where('id', Auth::user()->id)->first()->friends()->lists('id'));
         })->orderBy('created_at', 'desc')->simplePaginate(10);
 
-        return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends)->with('request',$request);
+        return view('pages.dashboard')->with('statuses', $statuses)->with('friends',$friends);
     }
 
     public function postArticle(Request $request)
@@ -47,6 +46,7 @@ class PostController extends Controller
                     $status->image_url = "public/images/".$filename;
                     $status->save();
                     Input::file('images_upload')->move("public/images", $filename);
+                    \Session::flash('messages',"Post status success");
                     return redirect()->back();
                 } else {
                     $status = new Status();
@@ -57,6 +57,7 @@ class PostController extends Controller
                     $status->save();
                     Input::file('images_upload')->move("public/images", $filename);
 //                    Storage::disk('local')->put($filename,File::get($file));
+                    \Session::flash('messages',"Post status success");
                     return redirect()->back();
                 }
 
@@ -69,12 +70,14 @@ class PostController extends Controller
                     $status->user_id = Auth::user()->id;
 
                     $status->save();
-                    return redirect('dashboard');
+                    \Session::flash('messages',"Post status success");
+                    return redirect()->back();
                 } else {
                     return redirect()->back();
                 }
 
         }
+        \Session::flash('messages',"Post status failure");
         return redirect()->back();
 //        if(Input::hasFile('images')){
 //            $file = Input::file('images');
@@ -97,8 +100,10 @@ class PostController extends Controller
                 $comm->status_id = $stacomment;
                 $comm->save();
 
+                \Session::flash('messages',"Post comment success");
                 return redirect()->back();
             } else {
+                \Session::flash('messages',"Post comment failure");
                 return redirect()->back();
             }
         }
@@ -119,7 +124,7 @@ class PostController extends Controller
         $delComment = Comment::where('id',$id)->first();
         $delComment -> delete();
 
-        \Session::flash('messages',"Coment have been delete");
+        \Session::flash('messages',"Comment have been delete");
         return redirect()->back();
     }
 

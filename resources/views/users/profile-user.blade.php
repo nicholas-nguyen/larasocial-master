@@ -50,7 +50,7 @@
                         @elseif(App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 1)
                             <a class="btn btn-info btn-block"><b>Waitting accept</b></a>
                         @elseif(App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 3)
-                            <a href="{{ route('friends.accept', ['id' => $user->id]) }}" class="btn btn-info btn-block"><b>Accept
+                            <a href="{{ route('friends.accept', ['id' => $user->id]) }}" class="btn btn-success btn-block"><b>Accept
                                     friend</b></a>
                         @elseif(
                             App\Users::checkFriendStatus(Auth::user()->id,$user->id) == 2 ||
@@ -77,7 +77,7 @@
 
                         <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
                             @if($user->hometown)
-                                {{ $user->hometown }}
+                                <a href="https://www.google.com.vn/#q={{ $user->hometown }}" target="_blank">{{ $user->hometown }}</a>
                             @else
                                 Unknown
                             @endif
@@ -89,7 +89,7 @@
 
                         <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
                             @if($user->currentcity)
-                                {{ $user->currentcity }}
+                                <a href="https://www.google.com.vn/#q={{ $user->currentcity }}" target="_blank">{{ $user->currentcity }}</a>
                             @else
                                 Unknown
                             @endif
@@ -101,7 +101,7 @@
 
                         <p class="text-muted" style="margin-left:17px; color: #00c0ef;">
                             @if($user->school)
-                                {{ $user->school }}
+                                <a href="https://www.google.com.vn/#q={{ $user->school }}" target="_blank">{{ $user->school }}</a>
                             @else
                                 Unknown
                             @endif

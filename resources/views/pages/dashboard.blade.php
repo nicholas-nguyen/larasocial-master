@@ -141,18 +141,18 @@
                     <li class="dropdown notifications-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa  fa-users"></i>
-                            @if($request->count() != 0)
-                                <span class="label label-warning">{{  $request->count() }}</span>
+                            @if(\App\Users::friendRequests()->count() != 0)
+                                <span class="label label-warning">{{  \App\Users::friendRequests()->count() }}</span>
                             @else
                                 <span class="label label-warning"></span>
                             @endif
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="header">You have {{ $request->count() }} friend request</li>
+                            <li class="header">You have {{ \App\Users::friendRequests()->count() }} friend request</li>
                             <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                    @foreach($request as $r)
+                                    @foreach(\App\Users::friendRequests() as $r)
                                         <li>
                                             <a href="{{ route('profile.index',['id' => $r->id])}}">
                                                 @if($r->avatar_url != null)
@@ -173,7 +173,12 @@
                         </ul>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
-
+                    <li class="dropdown notifications-menu">
+                        <!-- Menu toggle button -->
+                        <a href="{{ url('/dashboard') }}"><i class="glyphicon glyphicon-th-large"></i>
+                            Dashboard
+                        </a>
+                    </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             @if(Auth::user()->avatar_url != null)
@@ -184,7 +189,7 @@
                                      src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}" alt="User Image"
                                      style="width: 160px;height: 160px;">
                             @endif
-                            <span class="hidden-xs">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
+                            <span class="hidden-xs">&nbsp;&nbsp; {{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -214,7 +219,7 @@
                                             <br>password</a>
                                     </div>
                                     {{--<div class="col-xs-4 text-center">--}}
-                                        {{--<a href="#" data-toggle="modal" data-target="#friendRequestModal">Friends</a>--}}
+                                    {{--<a href="#" data-toggle="modal" data-target="#friendRequestModal">Friends</a>--}}
                                     {{--</div>--}}
                                 </div>
                                 <!-- /.row -->
@@ -249,9 +254,9 @@
             <form action="{{ url('search') }}" method="post" class="sidebar-form">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="input-group">
-                    <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search...">
+                    <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search..." title="key words">
                       <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search"><i
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search" title="search"><i
                                     class="fa fa-search"></i>
                         </button>
                       </span>
@@ -317,13 +322,13 @@
                                         <img id="blah" src="" alt="" style="padding-left: 10px;"/>
                                         <!-- /.box-body -->
                                         <div class="box-footer">
-                                            <label class="btn btn-success">
+                                            <label class="btn btn-success" title="Add your picture">
                                                 Picture
                                                 <input type="file" accept="image/jpg,image/jpeg,image/png"
                                                        name="images_upload" style="display: none;"
                                                        onchange="readURL(this);">
                                             </label>
-                                            <button type="submit" class="btn btn-info pull-right">Post</button>
+                                            <button type="submit" class="btn btn-info pull-right" title="Post">Post</button>
                                         </div>
                                         <!-- /.box-footer -->
                                     </form>

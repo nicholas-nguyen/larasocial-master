@@ -5,6 +5,7 @@ namespace App;
 use App\Status;
 use App\Comment;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Users extends Model
 {
@@ -75,9 +76,9 @@ class Users extends Model
         return $this->friendsOfMine()->wherePivot('accepted', true)->get()->merge($this->friendsOf()->wherePivot('accepted', true)->get());
     }
 
-    public function friendRequests()
+    public static function friendRequests()
     {
-        return $this->friendsOf()->wherePivot('accepted', false)->get();
+        return Users::find(Auth::user()->id)->friendsOf()->wherePivot('accepted', false)->get();
     }
 
     public function friendRequestsPending()

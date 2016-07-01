@@ -21,7 +21,9 @@
                 {{--</ul>--}}
             {{--</div>--}}
         {{--@endif--}}
-
+        @if(Session::has('messages'))
+            <div class="alert alert-success">{{ Session::get('messages') }}</div>
+        @endif
         <div class="login-box-body">
             <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
             <form action="{{ url('post-login') }}" method="post">
