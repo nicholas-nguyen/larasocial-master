@@ -258,11 +258,11 @@
                     <div class="form-group" style="text-align: center;">
                         @if(Auth::user()->avatar_url != null)
                             <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar"
-                                 alt="User Image" style="width: 160px;height: 160px;">
+                                 alt="User Image" style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;"">
                         @else
                             <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
                                  id="img_avatar" alt="User Image"
-                                 style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                                 style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;"">
                         @endif
                     </div>
                 </div>

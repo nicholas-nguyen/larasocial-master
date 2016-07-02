@@ -8,9 +8,9 @@
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="public/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="public/css/ionicons.min.css">
+    <link rel="stylesheet" href="public/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css">
     <!-- Theme style -->
     <link rel="stylesheet" href="public/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -27,7 +27,7 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <script src="{{ asset('public/css/jquery-ui.css') }}"></script>
-<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
+<script src="public/socket.io/socket.io.js"></script>
 <script src="{{ asset('public/js/jquery-2.2.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-migrate-1.4.1.min.js') }}"></script>
 <script src="{{ asset('public/js/jquery-ui.min.js') }}"></script>
@@ -254,9 +254,11 @@
             <form action="{{ url('search') }}" method="post" class="sidebar-form">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="input-group">
-                    <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search..." title="key words">
+                    <input type="text" id="search_text" name="search_text" class="form-control" placeholder="Search..."
+                           title="key words">
                       <span class="input-group-btn">
-                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search" title="search"><i
+                        <button type="submit" name="search" id="search-btn" class="btn btn-flat btn-search"
+                                title="search"><i
                                     class="fa fa-search"></i>
                         </button>
                       </span>
@@ -328,7 +330,8 @@
                                                        name="images_upload" style="display: none;"
                                                        onchange="readURL(this);">
                                             </label>
-                                            <button type="submit" class="btn btn-info pull-right" title="Post">Post</button>
+                                            <button type="submit" class="btn btn-info pull-right" title="Post">Post
+                                            </button>
                                         </div>
                                         <!-- /.box-footer -->
                                     </form>
@@ -766,11 +769,11 @@
                     <div class="form-group" style="text-align: center;">
                         @if(Auth::user()->avatar_url != null)
                             <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar"
-                                 alt="User Image" style="width: 160px;height: 160px;">
+                                 alt="User Image" style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @else
                             <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
                                  id="img_avatar" alt="User Image"
-                                 style="display: block;margin: auto;max-width: 100%;max-height: 100%;">
+                                 style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;"">
                         @endif
                     </div>
                 </div>
