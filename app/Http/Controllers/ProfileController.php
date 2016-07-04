@@ -51,7 +51,7 @@ class ProfileController extends Controller
                 Input::file('images_avatar')->move("public/images/avatar/", $filename);
 //                    Storage::disk('local')->put($filename,File::get($file));
             \Session::flash('messages',"Avatar have been changed");
-                return redirect()->back();
+                return redirect('dashboard');
         }
         else {
             \Session::flash('messages',"Avatar haven't been changed");

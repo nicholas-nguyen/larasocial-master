@@ -49,7 +49,7 @@ class UserController extends Controller
     }
 
     public function changePassword(Request $request){
-        $user = Users::find(Auth::user()->id);
+        $user = Users::where('id',Auth::user()->id)->first();
 
         $validator = Validator::make($request->all(), [
             'current_password' => 'required',

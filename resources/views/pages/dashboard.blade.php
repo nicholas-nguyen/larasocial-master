@@ -59,7 +59,7 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-envelope-o"></i>
-                            <span class="label label-success">4</span>
+                            <span class="label label-success"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li class="header">You have 4 messages</li>
@@ -886,9 +886,7 @@
 
             reader.onload = function (e) {
                 $('#blah')
-                        .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+                        .attr('src', e.target.result).height(100);
             };
 
             reader.readAsDataURL(input.files[0]);
@@ -900,9 +898,7 @@
 
             reader.onload = function (e) {
                 $('#img_avatar')
-                        .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+                        .attr('src', e.target.result);
             };
 
             reader.readAsDataURL(input.files[0]);

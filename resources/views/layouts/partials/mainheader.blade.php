@@ -23,7 +23,7 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="label label-success">4</span>
+                        <span class="label label-success"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="header">{{ trans('adminlte_lang::message.tabmessages') }}</li>
@@ -258,11 +258,11 @@
                     <div class="form-group" style="text-align: center;">
                         @if(Auth::user()->avatar_url != null)
                             <img class="text-center" src="{{ URL::asset(Auth::user()->avatar_url) }}" id="img_avatar"
-                                 alt="User Image" style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;"">
+                                 alt="User Image" style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @else
                             <img class="text-center" src="{{ \App\Users::find(Auth::user()->id)->getAvatarUrl() }}"
                                  id="img_avatar" alt="User Image"
-                                 style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;"">
+                                 style="width: 25%;height: auto;display: block;margin: auto;max-width: 100%;max-height: 100%;">
                         @endif
                     </div>
                 </div>
@@ -289,9 +289,7 @@
 
             reader.onload = function (e) {
                 $('#img_avatar')
-                        .attr('src', e.target.result)
-                        .width(150)
-                        .height(200);
+                        .attr('src', e.target.result);
             };
 
             reader.readAsDataURL(input.files[0]);
